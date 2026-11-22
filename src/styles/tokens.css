@@ -1,0 +1,30 @@
+/* fuxx landing tokens. Status colours: fuxx's Catppuccin Mocha chrome
+   (fuxx-cli assets/themes/chrome/Catppuccin Mocha). Green: the ╭∩╮ neon (logo master SVG). */
+:root {
+  --bg: #05070a;
+  --bg-raised: #0b0f13;
+  --bg-card: #0d1216;
+  --fg: #e6efe9;
+  --dim: #8d9c94;
+  --faint: #4b5852;
+  --line: #1a2620;
+  --line-strong: #27382f;
+  --green: #00ff66;
+  --green-soft: #3dff8a;
+  --green-glow: rgba(0, 255, 102, 0.35);
+  --working: #fab387;
+  --waiting: #f38ba8;
+  --done: #a6e3a1;
+  --mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1200px;
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --step-0: clamp(0.92rem, 0.88rem + 0.2vw, 1rem);
+  --step-1: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  --step-2: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 3.2rem);
+  --step-4: clamp(2.4rem, 1.7rem + 3.6vw, 5rem);
+  color-scheme: dark;
+}
