@@ -1,0 +1,35 @@
+import { render, screen } from '@testing-library/react'
+import { setMatchMedia } from './setup'
+import { ScrollTrigger } from '../src/lib/gsap'
+import { chapters } from '../src/content/chapters'
+import { inventory } from '../src/content/inventory'
+import { Story } from '../src/sections/Story'
+
+const TITLES = ['Knows your agents', 'Agent tabs & the agent box', 'Workspaces, panes, tabs', 'Your repo, live', 'Script it']
+
+afterEach(() => { setMatchMedia(() => false); vi.restoreAllMocks() })
+
+test('five chapters, in order', () => {
+  render(<Story />)
+  const heads = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+  expect(heads).toEqual(TITLES)
+})
+
+test('every chapter capability exists in the inventory', () => {
+  const ids = new Set(inventory.map((c) => c.id))
+  for (const ch of chapters) for (const id of ch.capabilities) expect(ids.has(id), id).toBe(true)
+})
+
+test('reduced motion: no pinning', () => {
+  setMatchMedia((q) => q.includes('prefers-reduced-motion: reduce'))
+  const spy = vi.spyOn(ScrollTrigger, 'create')
+  render(<Story />)
+  expect(spy.mock.calls.some(([v]) => v && (v as ScrollTrigger.Vars).pin)).toBe(false)
+})
+
+test('wide screen with motion: the story pins', () => {
+  setMatchMedia((q) => q.includes('min-width') || q.includes('no-preference'))
+  const spy = vi.spyOn(ScrollTrigger, 'create')
+  render(<Story />)
+  expect(spy.mock.calls.some(([v]) => v && (v as ScrollTrigger.Vars).pin)).toBe(true)
+})
