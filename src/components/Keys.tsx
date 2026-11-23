@@ -21,7 +21,8 @@ export function splitCombo(combo: string): string[][] {
 
 export function Keys({ combo }: { combo: string }) {
   return (
-    <span className="keys" aria-label={combo}>
+    <span className="keys">
+      <span className="visually-hidden">{combo}</span>
       {splitCombo(combo).map((caps, i) => (
         <span key={i} className="keys__group" aria-hidden="true">
           {i > 0 ? <span className="keys__or">/</span> : null}
