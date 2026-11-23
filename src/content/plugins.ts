@@ -17,8 +17,10 @@ export const plugins = {
   ],
   completes: {
     repo: 'fitzfitz/fuxx-completes',
+    version: 'v0.1.0',
     blurb:
-      'Grey ghost-text suggestions from the commands you ran here before, and a numbered list when you pause. Nothing ever runs for you.',
+      'Grey ghost-text suggestions from what you ran here before and your project’s own commands, a numbered list when you pause, and the likely fix after a failed command. Secrets and destructive commands stay out. Nothing ever runs for you.',
+    brew: 'brew install fuxx-dev/tap/fuxx-completes',
   },
   confSnippet: `# A theme plugin
 format      = 1

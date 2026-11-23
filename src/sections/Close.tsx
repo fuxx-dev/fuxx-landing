@@ -27,7 +27,7 @@ export function Footer() {
       <footer className="foot">
         <div className="foot__inner wrap">
           <span className="foot__mark" aria-hidden="true">╭∩╮</span>
-          <span>fuxx · built with Rust and love</span>
+          <span>fuxx · built with Rust and chaos</span>
           <nav className="foot__links" aria-label="Links">
             <a href={REPO_URL}>GitHub</a>
             <a href={`${REPO_URL}/releases`}>Releases</a>

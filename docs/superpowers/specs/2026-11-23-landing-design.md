@@ -158,7 +158,7 @@ exists (`file-diff-cards`, `file-tab-md-reader-github`, `browser-tab`, `shell-ca
 ### 6. Close
 
 Download + Star again, the 3-step install (unzip, drag to Applications, Open Anyway once — from the README),
-"updates itself after that", footer (GitHub, releases, "Built with Rust and love", ╭∩╮).
+"updates itself after that", footer (GitHub, releases, "Built with Rust and chaos", ╭∩╮).
 
 ### Typed terminal replays (for capabilities with no scene)
 

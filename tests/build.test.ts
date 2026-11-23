@@ -36,8 +36,9 @@ test('all five chapter titles are in the prerendered page', () => {
   }
 })
 
-test('the page says fuxx-completes is coming soon', () => {
-  expect(text.toLowerCase()).toContain('coming soon')
+test('the page offers fuxx-completes as released, with its Homebrew line', () => {
+  expect(text.toLowerCase()).not.toContain('coming soon')
+  expect(text).toContain('brew install fuxx-dev/tap/fuxx-completes')
 })
 
 test('download and star links point at the real places', () => {

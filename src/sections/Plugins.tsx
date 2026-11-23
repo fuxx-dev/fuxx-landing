@@ -40,16 +40,18 @@ export function Plugins() {
             </div>
           </article>
         ))}
-        <article className="pcard pcard--soon">
-          <p className="pcard__kind">
-            helper plugin · <span className="pcard__soon">coming soon</span>
-          </p>
+        <article className="pcard">
+          <p className="pcard__kind">helper plugin · {plugins.completes.version} · try it</p>
           <h3 className="pcard__name">fuxx-completes</h3>
           <p className="pcard__blurb">{plugins.completes.blurb}</p>
           <GhostDemo />
           <div className="pcard__repo">
             <a href={`https://github.com/${plugins.completes.repo}`}>{plugins.completes.repo}</a>
+            <CopyButton text={`https://github.com/${plugins.completes.repo}`} label="Copy link" />
           </div>
+          <p className="pcard__also">
+            Outside fuxx (zsh, bash): <code>{plugins.completes.brew}</code>
+          </p>
         </article>
       </div>
 
