@@ -1,0 +1,115 @@
+import { plugins } from '../content/plugins'
+import { byId } from '../content/inventory'
+import { PLUGIN_CAPABILITIES } from '../content/plugins'
+import { CopyButton } from '../components/CopyButton'
+import { FuxxWindow } from '../components/FuxxWindow'
+import './plugins.css'
+
+export function Plugins() {
+  return (
+    <section id="plugins" className="plugins wrap" aria-labelledby="plugins-title">
+      <p className="kicker">Plugins</p>
+      <h2 id="plugins-title" className="section-title">Paste a GitHub link. That’s the install.</h2>
+
+      <div className="plugins__system">
+        <div>
+          <p className="plugins__lede">
+            A plugin is a public GitHub repo with a <code>fuxx-plugin.conf</code> at the top. Install it from
+            Settings → Plugins, remove it from the same page. Updates come from the repo.
+          </p>
+          <ul className="plugins__caps">
+            {PLUGIN_CAPABILITIES.map((id) => (
+              <li key={id}>{byId.get(id)!.text}</li>
+            ))}
+          </ul>
+        </div>
+        <FuxxWindow title="Settings — Plugins" className="plugins__mock">
+          <SettingsMock />
+        </FuxxWindow>
+      </div>
+
+      <div className="plugins__cards">
+        {plugins.samples.map((p) => (
+          <article key={p.repo} className="pcard">
+            <p className="pcard__kind">{p.kind} · try it</p>
+            <h3 className="pcard__name">{p.name}</h3>
+            <p className="pcard__blurb">{p.blurb}</p>
+            <div className="pcard__repo">
+              <a href={`https://github.com/${p.repo}`}>{p.repo}</a>
+              <CopyButton text={`https://github.com/${p.repo}`} label="Copy link" />
+            </div>
+          </article>
+        ))}
+        <article className="pcard pcard--soon">
+          <p className="pcard__kind">
+            helper plugin · <span className="pcard__soon">coming soon</span>
+          </p>
+          <h3 className="pcard__name">fuxx-completes</h3>
+          <p className="pcard__blurb">{plugins.completes.blurb}</p>
+          <GhostDemo />
+          <div className="pcard__repo">
+            <a href={`https://github.com/${plugins.completes.repo}`}>{plugins.completes.repo}</a>
+          </div>
+        </article>
+      </div>
+
+      <div className="plugins__own">
+        <div>
+          <h3 className="plugins__own-title">Write your own</h3>
+          <p className="plugins__lede">
+            Themes are plain text files. Helpers bring a <code>bin</code> folder and zsh scripts, and can declare
+            settings. <a href={plugins.docsUrl}>The whole format is in the README.</a>
+          </p>
+        </div>
+        <div className="plugins__code">
+          <div className="plugins__code-bar">
+            <span>fuxx-plugin.conf</span>
+            <CopyButton text={plugins.confSnippet} />
+          </div>
+          <pre><code>{plugins.confSnippet}</code></pre>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SettingsMock() {
+  return (
+    <div className="smock" aria-label="Settings, Plugins page with the two sample plugins installed" role="img">
+      <div className="smock__add">
+        <span className="smock__input">https://github.com/…</span>
+        <span className="smock__btn">Install</span>
+      </div>
+      {[
+        { name: 'Sunset Themes', v: '1.0.0', d: 'Warm themes from the design team.' },
+        { name: 'Hello Helper', v: '1.0.0', d: 'A tiny test plugin: a fuxx-hello command and a FUXX_HELLO variable.' },
+      ].map((p) => (
+        <div key={p.name} className="smock__row">
+          <div className="smock__head">
+            <span className="smock__name">{p.name}</span>
+            <span className="smock__ver">{p.v}</span>
+            <span className="smock__pill">Installed</span>
+            <span className="smock__remove">Remove</span>
+          </div>
+          <p className="smock__desc">{p.d}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function GhostDemo() {
+  return (
+    <div className="ghost" aria-hidden="true">
+      <div className="ghost__line">
+        <span className="ghost__prompt">~/proj $</span> <span className="ghost__typed">git push o</span>
+        <span className="ghost__hint">rigin feature/login</span>
+      </div>
+      <ol className="ghost__list">
+        <li><span>1</span> npm run dev</li>
+        <li><span>2</span> npm run build</li>
+        <li><span>3</span> npm run test</li>
+      </ol>
+    </div>
+  )
+}

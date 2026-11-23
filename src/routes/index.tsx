@@ -3,6 +3,9 @@ import { Header } from '../components/Header'
 import { Hero } from '../sections/Hero'
 import { Pain } from '../sections/Pain'
 import { Story } from '../sections/Story'
+import { Grid } from '../sections/Grid'
+import { Plugins } from '../sections/Plugins'
+import { Close, Footer } from '../sections/Close'
 
 export const Route = createFileRoute('/')({ component: Landing })
 
@@ -14,8 +17,11 @@ function Landing() {
         <Hero />
         <Pain />
         <Story />
-        <div style={{ height: '60vh' }} />
+        <Grid />
+        <Plugins />
+        <Close />
       </main>
+      <Footer />
     </>
   )
 }
