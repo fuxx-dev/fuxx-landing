@@ -3,8 +3,8 @@ import { Plugins } from '../src/sections/Plugins'
 
 test('shows both sample plugins, fuxx-completes as released, and a conf snippet', () => {
   const { container } = render(<Plugins />)
-  expect(container.textContent).toContain('fitzfitz/fuxx-sunset-themes')
-  expect(container.textContent).toContain('fitzfitz/fuxx-hello-helper')
+  expect(container.textContent).toContain('fuxx-dev/fuxx-sunset-themes')
+  expect(container.textContent).toContain('fuxx-dev/fuxx-hello-helper')
   const completes = screen.getByRole('heading', { name: /fuxx-completes/ }).closest('article')!
   expect(completes.textContent).not.toMatch(/coming soon/i)
   expect(completes.textContent).toContain('v0.1.0')

@@ -4,19 +4,19 @@ export const plugins = {
   samples: [
     {
       name: 'Sunset Themes',
-      repo: 'fitzfitz/fuxx-sunset-themes',
+      repo: 'fuxx-dev/fuxx-sunset-themes',
       kind: 'theme plugin',
       blurb: 'Two warm themes, Sunset and Sunset Light. The smallest possible plugin: a conf file and two theme files.',
     },
     {
       name: 'Hello Helper',
-      repo: 'fitzfitz/fuxx-hello-helper',
+      repo: 'fuxx-dev/fuxx-hello-helper',
       kind: 'helper plugin',
       blurb: 'Puts a fuxx-hello command on your PATH and a FUXX_HELLO variable in every new terminal. Small enough to read in a minute.',
     },
   ],
   completes: {
-    repo: 'fitzfitz/fuxx-completes',
+    repo: 'fuxx-dev/fuxx-completes',
     version: 'v0.1.0',
     blurb:
       'Grey ghost-text suggestions from what you ran here before and your project’s own commands, a numbered list when you pause, and the likely fix after a failed command. Secrets and destructive commands stay out. Nothing ever runs for you.',

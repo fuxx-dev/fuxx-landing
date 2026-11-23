@@ -31,7 +31,7 @@ export function Footer() {
           <nav className="foot__links" aria-label="Links">
             <a href={REPO_URL}>GitHub</a>
             <a href={`${REPO_URL}/releases`}>Releases</a>
-            <a href="https://github.com/fitzfitz/fuxx-sunset-themes">Plugin samples</a>
+            <a href="https://github.com/fuxx-dev/fuxx-sunset-themes">Plugin samples</a>
           </nav>
         </div>
       </footer>
