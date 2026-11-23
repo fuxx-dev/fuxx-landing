@@ -11,3 +11,12 @@ test('manual when writeText rejects', async () => {
 test('manual when there is no clipboard', async () => {
   expect(await copyText('x', undefined)).toBe('manual')
 })
+
+test('falls back to execCommand copy when the Clipboard API refuses', async () => {
+  const exec = vi.fn(() => true)
+  ;(document as unknown as { execCommand: unknown }).execCommand = exec
+  const denied = { writeText: async () => { throw new Error('denied') } } as unknown as Clipboard
+  expect(await copyText('hello', denied)).toBe('copied')
+  expect(exec).toHaveBeenCalledWith('copy')
+  delete (document as unknown as { execCommand?: unknown }).execCommand
+})

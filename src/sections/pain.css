@@ -2,6 +2,10 @@
 .pain__line { font-size: var(--step-3); font-weight: 600; line-height: 1.2; max-width: 22ch; letter-spacing: -0.02em; }
 .pain__w { display: inline; }
 .pain__ask { margin-top: 28px; display: inline-flex; align-items: center; gap: 14px; font-size: var(--step-2); color: var(--waiting); font-weight: 700; }
-.pain__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--waiting); box-shadow: 0 0 0 0 var(--waiting); animation: pain-ping 2.4s ease-out infinite; }
-@keyframes pain-ping { 0% { box-shadow: 0 0 0 0 rgba(243, 139, 168, 0.6); } 80%, 100% { box-shadow: 0 0 0 14px rgba(243, 139, 168, 0); } }
-@media (prefers-reduced-motion: reduce) { .pain__dot { animation: none; } }
+.pain__dot { position: relative; width: 12px; height: 12px; border-radius: 50%; background: var(--waiting); }
+.pain__dot::after { /* the ping ring: scale + opacity only */
+  content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--waiting);
+  animation: pain-ping 2.4s ease-out infinite;
+}
+@keyframes pain-ping { 0% { transform: scale(1); opacity: 0.7; } 80%, 100% { transform: scale(3.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pain__dot::after { animation: none; opacity: 0; } }

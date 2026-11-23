@@ -1,14 +1,13 @@
 .grid { padding: clamp(80px, 14vh, 160px) 0 0; }
-.grid__cards {
+.grid__cards { /* masonry: every card is exactly as tall as its content */
   margin-top: clamp(28px, 5vh, 48px);
-  display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  grid-auto-flow: dense;
+  columns: 3 300px; column-gap: 14px;
 }
 .card {
   position: relative; display: flex; flex-direction: column; gap: 12px;
   padding: 20px; border: 1px solid var(--line); border-radius: var(--radius);
   background: var(--bg-card);
+  break-inside: avoid; margin: 0 0 14px;
 }
 .card::after { /* the neon edge on hover, animated by opacity only */
   content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
@@ -16,13 +15,11 @@
   transition: opacity 220ms ease;
 }
 .card:hover::after { opacity: 1; }
-.card--visual { grid-row: span 2; }
 .card__title { font-size: var(--step-1); }
 .card__caps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--step--1); color: var(--dim); }
 .card__caps li { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
-.card__caps li > span { flex: 1 1 20ch; }
 .card__visual {
-  margin-top: auto; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #0a0e11;
+  margin-top: 4px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #0a0e11;
   transition: transform 260ms ease;
 }
 .card:hover .card__visual { transform: translateY(-4px); }
@@ -40,7 +37,7 @@
 .demo-sounds { position: relative; height: 120px; display: flex; align-items: center; justify-content: center; gap: 12px; }
 .demo-sounds__key { font-size: 14px; animation: key-press 2.4s ease-in-out infinite; }
 .demo-sounds__key--late { animation-delay: 1.2s; }
-@keyframes key-press { 0%, 20%, 100% { transform: translateY(0); border-bottom-width: 2px; } 8% { transform: translateY(2px); border-bottom-width: 1px; box-shadow: 0 0 14px -2px var(--green-glow); } }
+@keyframes key-press { 0%, 20%, 100% { transform: translateY(0); } 8% { transform: translateY(2px); } }
 @media (prefers-reduced-motion: reduce) {
   .demo-cursor__caret, .demo-cursor__trail, .demo-sounds__key { animation: none; }
   .demo-cursor__trail { opacity: 0; }

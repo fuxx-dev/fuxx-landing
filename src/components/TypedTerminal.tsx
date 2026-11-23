@@ -57,22 +57,16 @@ export function TypedTerminal({
     .map((l) => ({ l, text: l.text }))
   const current = shown.line < lines.length ? lines[shown.line] : null
   const typingNow = started && current?.kind === 'cmd'
+  // About to print output: no fresh prompt yet, the caret waits on the command line above.
+  const waitingOutput = current?.kind === 'out' && visible.length > 0
 
   return (
     <div ref={ref} className="tt" role="img" aria-label={transcript}>
       <div aria-hidden="true">
         {visible.map(({ l, text }, i) => (
-          <Line key={i} kind={l.kind} text={text} />
+          <Line key={i} kind={l.kind} text={text} caret={waitingOutput && i === visible.length - 1} />
         ))}
-        {current ? (
-          typingNow ? (
-            <Line kind="cmd" text={current.text.slice(0, shown.chars)} caret />
-          ) : (
-            <Line kind="cmd" text="" caret />
-          )
-        ) : (
-          <Line kind="cmd" text="" caret />
-        )}
+        {waitingOutput ? null : <Line kind="cmd" text={typingNow && current ? current.text.slice(0, shown.chars) : ''} caret />}
       </div>
     </div>
   )

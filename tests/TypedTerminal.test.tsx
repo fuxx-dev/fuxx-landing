@@ -55,3 +55,21 @@ test('reduced motion arriving after mount shows the end state at once, without t
   rerender(<TypedTerminal script="cli" reduced />)
   for (const t of lines()) expect(container.textContent).toContain(t)
 })
+
+test('no empty prompt flashes before a command’s output', async () => {
+  const { container } = render(<TypedTerminal script="cli" />)
+  await act(async () => { fire?.() })
+  const first = replays.cli[0].text
+  let typed = false
+  for (let i = 0; i < 400; i++) {
+    await act(async () => { vi.advanceTimersByTime(20) })
+    const text = container.textContent ?? ''
+    if (text.includes(replays.cli[1].text + '~')) break // output shown, next prompt after it
+    if (!typed && text.includes(first)) typed = true
+    if (typed && !text.includes('s4')) {
+      const empties = [...container.querySelectorAll('.tt__line--cmd')].filter((l) => l.textContent?.trim() === '~/code/api $')
+      expect(empties.length).toBe(0)
+    }
+  }
+  expect(typed).toBe(true)
+})

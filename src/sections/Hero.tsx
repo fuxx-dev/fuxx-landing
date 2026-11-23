@@ -66,18 +66,31 @@ export function Hero() {
     }
     canvas.addEventListener('webglcontextlost', onLost)
 
-    const boot = () => {
+    let narrowNow = isNarrow()
+    const build = () =>
       loadHeroScene()
         .then(({ createHeroScene }) => {
           if (disposed) return
-          scene = createHeroScene(canvas, { narrow: isNarrow(), label: labelRef.current, colors: COLORS })
+          scene?.dispose()
+          scene = createHeroScene(canvas, { narrow: narrowNow, label: labelRef.current, colors: COLORS })
           setLive(true)
           sync()
         })
         .catch(() => {
           /* the static mascot stays */
         })
+    const boot = () => void build()
+    // Bloom and glyph count depend on phone vs desktop: rebuild when the window crosses the breakpoint.
+    let resizeTimer: number | undefined
+    const onResize = () => {
+      window.clearTimeout(resizeTimer)
+      resizeTimer = window.setTimeout(() => {
+        if (!scene || isNarrow() === narrowNow) return
+        narrowNow = isNarrow()
+        void build()
+      }, 250)
     }
+    window.addEventListener('resize', onResize)
     const hasIdle = 'requestIdleCallback' in window
     const idle = hasIdle ? window.requestIdleCallback(boot, { timeout: 1200 }) : window.setTimeout(boot, 200)
 
@@ -89,6 +102,8 @@ export function Hero() {
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('pointermove', onPointer)
       canvas.removeEventListener('webglcontextlost', onLost)
+      window.removeEventListener('resize', onResize)
+      window.clearTimeout(resizeTimer)
       scene?.dispose()
     }
   }, [])

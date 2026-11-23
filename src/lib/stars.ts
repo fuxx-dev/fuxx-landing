@@ -29,12 +29,22 @@ function writeCache(storage: Storage | null, n: number) {
   }
 }
 
-export async function getStarCount(
+let inflight: Promise<number | null> | null = null
+
+/** One request however many buttons ask at once; cached for an hour where sessionStorage works. */
+export function getStarCount(
   fetchImpl: typeof fetch = fetch,
   storage: Storage | null = safeSessionStorage(),
 ): Promise<number | null> {
   const cached = readCache(storage)
-  if (cached !== null) return cached
+  if (cached !== null) return Promise.resolve(cached)
+  inflight ??= fetchStars(fetchImpl, storage).finally(() => {
+    inflight = null
+  })
+  return inflight
+}
+
+async function fetchStars(fetchImpl: typeof fetch, storage: Storage | null): Promise<number | null> {
   try {
     const res = await fetchImpl(URL, { headers: { Accept: 'application/vnd.github+json' } })
     if (!res.ok) return null

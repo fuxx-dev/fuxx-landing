@@ -46,3 +46,10 @@ test('starLabel hides counts under 10', () => {
   expect(starLabel(10)).toBe('10')
   expect(starLabel(1500)).toBe('1.5k')
 })
+
+test('concurrent callers share one request', async () => {
+  const f = ok(5)
+  const [a, b, c] = await Promise.all([getStarCount(f, null), getStarCount(f, null), getStarCount(f, null)])
+  expect([a, b, c]).toEqual([5, 5, 5])
+  expect(f).toHaveBeenCalledTimes(1)
+})
