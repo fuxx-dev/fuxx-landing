@@ -1,0 +1,18 @@
+.fx-window {
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 255, 102, 0.04);
+}
+.fx-window__bar {
+  display: flex; align-items: center; gap: 7px;
+  height: 30px; padding: 0 12px;
+  border-bottom: 1px solid var(--line);
+  background: #080b0e;
+}
+.fx-window__dot { width: 10px; height: 10px; border-radius: 50%; background: #1c2621; }
+.fx-window__title { margin-left: 10px; font-size: 12px; color: var(--faint); }
+.fx-window__body { position: relative; }
+.fx-window__body img { width: 100%; height: auto; }

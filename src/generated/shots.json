@@ -1,0 +1,97 @@
+{
+  "agent-waiting": {
+    "width": 720,
+    "height": 450,
+    "alt": "fuxx's sidebar: the web workspace glows pink with Claude's question and an Open button, while the api workspace sits idle"
+  },
+  "window-split": {
+    "width": 720,
+    "height": 450,
+    "alt": "A fuxx window with two panes side by side, a test run on the left and Claude working on the right"
+  },
+  "agent-chat": {
+    "width": 640,
+    "height": 569,
+    "alt": "An agent tab: Claude's answer as formatted Markdown with a table and code, the agent box below"
+  },
+  "agent-permission": {
+    "width": 640,
+    "height": 248,
+    "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"
+  },
+  "agent-subagents": {
+    "width": 720,
+    "height": 419,
+    "alt": "Subagent pills above the chat: Main, Lint the code, Watch the tests, Check the build; one subagent's conversation is open"
+  },
+  "usage": {
+    "width": 640,
+    "height": 486,
+    "alt": "The live usage popover: percent used and when each limit resets"
+  },
+  "palette": {
+    "width": 720,
+    "height": 450,
+    "alt": "The ⌘K palette searching actions, workspaces, files and settings"
+  },
+  "changes": {
+    "width": 720,
+    "height": 469,
+    "alt": "The right sidebar's Changes panel with staged and unstaged files and the branch bar"
+  },
+  "commit": {
+    "width": 720,
+    "height": 469,
+    "alt": "Committing from the Changes panel while the agent writes the message"
+  },
+  "live-changes": {
+    "width": 720,
+    "height": 299,
+    "alt": "A file tab where the lines the agent just changed glow"
+  },
+  "ask": {
+    "width": 720,
+    "height": 505,
+    "alt": "Selected lines in a file with the bar that sends them to the agent"
+  },
+  "diff-cards": {
+    "width": 360,
+    "height": 266,
+    "alt": "A diff shown as review cards with the changed words marked"
+  },
+  "md-reader": {
+    "width": 360,
+    "height": 197,
+    "alt": "The Markdown reader: a centred column with GitHub-style formatting"
+  },
+  "browser": {
+    "width": 360,
+    "height": 184,
+    "alt": "A web page open as a tab next to the terminals"
+  },
+  "shell-cards": {
+    "width": 360,
+    "height": 293,
+    "alt": "Chat-style shell tab: each finished command is a card with Copy and Rerun"
+  },
+  "command-blocks": {
+    "width": 360,
+    "height": 180,
+    "alt": "Command blocks: a slim bar beside every command, red when it failed"
+  },
+  "preferences": {
+    "width": 360,
+    "height": 232,
+    "alt": "Preferences open on Appearance"
+  },
+  "welcome": {
+    "width": 360,
+    "height": 225,
+    "alt": "The welcome screen on first run"
+  },
+  "update": {
+    "width": 360,
+    "height": 199,
+    "alt": "The Update Available button in the sidebar"
+  }
+}

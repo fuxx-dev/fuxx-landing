@@ -1,0 +1,21 @@
+[
+  {"shot": "agent-sidebar-waiting-mocha", "name": "agent-waiting", "width": 720, "alt": "fuxx's sidebar: the web workspace glows pink with Claude's question and an Open button, while the api workspace sits idle"},
+  {"shot": "window-split-mocha", "name": "window-split", "width": 720, "alt": "A fuxx window with two panes side by side, a test run on the left and Claude working on the right"},
+  {"shot": "agent-tab-markdown-mocha", "name": "agent-chat", "width": 640, "alt": "An agent tab: Claude's answer as formatted Markdown with a table and code, the agent box below"},
+  {"shot": "agent-tab-permission-mocha", "name": "agent-permission", "width": 640, "crop": {"left": 40, "top": 178, "width": 680, "height": 264}, "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"},
+  {"shot": "agent-lanes-view-mocha", "name": "agent-subagents", "width": 720, "alt": "Subagent pills above the chat: Main, Lint the code, Watch the tests, Check the build; one subagent's conversation is open"},
+  {"shot": "status-bar-usage-open-mocha", "name": "usage", "width": 640, "alt": "The live usage popover: percent used and when each limit resets"},
+  {"shot": "palette-mocha", "name": "palette", "width": 720, "alt": "The ⌘K palette searching actions, workspaces, files and settings"},
+  {"shot": "changes-mocha", "name": "changes", "width": 720, "alt": "The right sidebar's Changes panel with staged and unstaged files and the branch bar", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},
+  {"shot": "changes-commit-writing-mocha", "name": "commit", "width": 720, "alt": "Committing from the Changes panel while the agent writes the message", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},
+  {"shot": "file-live-glow-mocha", "name": "live-changes", "width": 720, "alt": "A file tab where the lines the agent just changed glow", "crop": {"left": 0, "top": 44, "width": 760, "height": 316}},
+  {"shot": "ask-bar-mocha", "name": "ask", "width": 720, "alt": "Selected lines in a file with the bar that sends them to the agent", "crop": {"left": 290, "top": 0, "width": 810, "height": 568}},
+  {"shot": "file-diff-cards-mocha", "name": "diff-cards", "width": 360, "alt": "A diff shown as review cards with the changed words marked"},
+  {"shot": "file-tab-md-reader-github-mocha", "name": "md-reader", "width": 360, "alt": "The Markdown reader: a centred column with GitHub-style formatting", "crop": {"left": 0, "top": 44, "width": 1200, "height": 656}},
+  {"shot": "browser-tab-mocha", "name": "browser", "width": 360, "alt": "A web page open as a tab next to the terminals"},
+  {"shot": "shell-cards-mocha", "name": "shell-cards", "width": 360, "alt": "Chat-style shell tab: each finished command is a card with Copy and Rerun"},
+  {"shot": "command-blocks-mocha", "name": "command-blocks", "width": 360, "alt": "Command blocks: a slim bar beside every command, red when it failed"},
+  {"shot": "preferences-appearance-mocha", "name": "preferences", "width": 360, "alt": "Preferences open on Appearance"},
+  {"shot": "welcome-mocha", "name": "welcome", "width": 360, "alt": "The welcome screen on first run"},
+  {"shot": "update-available-mocha", "name": "update", "width": 360, "alt": "The Update Available button in the sidebar"}
+]
