@@ -9,6 +9,12 @@ const argFrom = process.argv.indexOf('--from')
 const from = resolve(argFrom > -1 ? process.argv[argFrom + 1] : '../fuxx-cli')
 const pngDir = join(from, 'target', 'ui-shots')
 const entries = parseManifest(JSON.parse(readFileSync('shots.manifest.json', 'utf8')))
+// Every render must be there before anything is written: a half sync would drop images from the page.
+const missing = entries.map((e) => join(pngDir, `${e.shot}.png`)).filter((p) => !existsSync(p))
+if (missing.length) {
+  console.error(`missing renders (run fuxx-cli's scripts/ui-shots.sh --png first):\n  ${missing.join('\n  ')}`)
+  process.exit(1)
+}
 mkdirSync('public/shots', { recursive: true })
 for (const f of staleFiles(readdirSync('public/shots'), entries.map((e) => e.name))) {
   unlinkSync(join('public/shots', f))

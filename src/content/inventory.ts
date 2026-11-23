@@ -21,6 +21,7 @@ export const inventory: Capability[] = [
   { id: 'b-attach-commands', group: 'B', text: '+ attaches files and images, / runs commands and skills, @ mentions files and subagents.' },
   { id: 'b-image-pills', group: 'B', text: 'Pasted images become “Image #1” pills, with a viewer.' },
   { id: 'b-drag-block', group: 'B', text: 'Drag a shell command block onto an agent tab to hand it the output.' },
+  { id: 'b-select-copy', group: 'B', text: 'Select anything in the chat and copy it: drag, double-click a word, ⌘C. ⌘A takes the whole chat.', keys: '⌘C' },
   { id: 'b-subagents', group: 'B', text: 'Subagents get a pill row: switch the chat to any subagent’s live conversation.', keys: '⌥⌘[ / ⌥⌘]' },
   { id: 'b-usage', group: 'B', text: 'Live usage in the status bar: % used and when it resets, every limit in a popover.' },
   // C. Workspaces, panes, tabs, sidebar

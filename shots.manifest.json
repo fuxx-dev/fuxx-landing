@@ -5,6 +5,7 @@
   {"shot": "agent-tab-permission-mocha", "name": "agent-permission", "width": 640, "crop": {"left": 40, "top": 178, "width": 680, "height": 264}, "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"},
   {"shot": "agent-lanes-view-mocha", "name": "agent-subagents", "width": 720, "alt": "Subagent pills above the chat: Main, Lint the code, Watch the tests, Check the build; one subagent's conversation is open"},
   {"shot": "status-bar-usage-open-mocha", "name": "usage", "width": 640, "alt": "The live usage popover: percent used and when each limit resets"},
+  {"shot": "agent-select-mocha", "name": "chat-select", "width": 360, "crop": {"left": 0, "top": 30, "width": 720, "height": 240}, "alt": "A reply in an agent tab with its heading and part of a sentence selected, ready to copy"},
   {"shot": "palette-mocha", "name": "palette", "width": 720, "alt": "The ⌘K palette searching actions, workspaces, files and settings"},
   {"shot": "changes-mocha", "name": "changes", "width": 720, "alt": "The right sidebar's Changes panel with staged and unstaged files and the branch bar", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},
   {"shot": "changes-commit-writing-mocha", "name": "commit", "width": 720, "alt": "Committing from the Changes panel while the agent writes the message", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},

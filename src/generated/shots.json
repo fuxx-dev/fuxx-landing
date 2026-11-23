@@ -29,6 +29,11 @@
     "height": 486,
     "alt": "The live usage popover: percent used and when each limit resets"
   },
+  "chat-select": {
+    "width": 360,
+    "height": 120,
+    "alt": "A reply in an agent tab with its heading and part of a sentence selected, ready to copy"
+  },
   "palette": {
     "width": 720,
     "height": 450,
