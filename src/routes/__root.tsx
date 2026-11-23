@@ -3,7 +3,7 @@ import { Outlet, createRootRoute, HeadContent, Scripts } from '@tanstack/react-r
 import css from '../styles/global.css?url'
 
 const SITE = 'https://fuxx.fitzfitz.site'
-const TITLE = 'fuxx — the terminal for people who run AI agents'
+const TITLE = 'fuxx — Your not-so-friendly neighborhood CLI'
 const DESCRIPTION =
   'A native, GPU-fast terminal for people who run AI coding agents and refuse to babysit them.'
 
