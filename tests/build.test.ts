@@ -14,13 +14,15 @@ function findIndexHtml(dir: string): string[] {
 
 const pages = findIndexHtml('dist')
 const html = pages.length === 1 ? readFileSync(pages[0], 'utf8') : ''
+/** The page's visible text: tags and React's text-split comments removed. */
+const text = html.replace(/<!--.*?-->/g, '').replace(/<[^>]+>/g, '')
 
 test('exactly one prerendered index.html for /', () => {
   expect(pages).toHaveLength(1)
 })
 
 test('the page carries the tagline and the OG image', () => {
-  expect(html).toContain('Your not-so-friendly neighborhood CLI.')
+  expect(text).toContain('Your not-so-friendly neighborhood CLI.')
   expect(html).toContain('<meta property="og:image"')
 })
 
