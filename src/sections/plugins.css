@@ -66,3 +66,4 @@
   width: min(260px, 50vw); padding: 6px 8px; border-radius: 6px; font: 12px/1 var(--mono);
   color: var(--fg); background: #0a0e11; border: 1px solid var(--working);
 }
+.pcard__also code { display: block; white-space: nowrap; overflow-x: auto; }
