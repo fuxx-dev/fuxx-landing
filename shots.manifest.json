@@ -8,6 +8,7 @@
   {"shot": "palette-mocha", "name": "palette", "width": 720, "alt": "The ⌘K palette searching actions, workspaces, files and settings"},
   {"shot": "changes-mocha", "name": "changes", "width": 720, "alt": "The right sidebar's Changes panel with staged and unstaged files and the branch bar", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},
   {"shot": "changes-commit-writing-mocha", "name": "commit", "width": 720, "alt": "Committing from the Changes panel while the agent writes the message", "crop": {"left": 290, "top": 0, "width": 810, "height": 528}},
+  {"shot": "changes-graph-mocha", "name": "graph", "width": 720, "crop": {"left": 290, "top": 0, "width": 810, "height": 528}, "alt": "The commit graph in the right sidebar: lanes, branch pills and a tag"},
   {"shot": "file-live-glow-mocha", "name": "live-changes", "width": 720, "alt": "A file tab where the lines the agent just changed glow", "crop": {"left": 0, "top": 44, "width": 760, "height": 316}},
   {"shot": "ask-bar-mocha", "name": "ask", "width": 720, "alt": "Selected lines in a file with the bar that sends them to the agent", "crop": {"left": 290, "top": 0, "width": 810, "height": 568}},
   {"shot": "file-diff-cards-mocha", "name": "diff-cards", "width": 360, "alt": "A diff shown as review cards with the changed words marked"},

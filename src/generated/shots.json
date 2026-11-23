@@ -44,6 +44,11 @@
     "height": 469,
     "alt": "Committing from the Changes panel while the agent writes the message"
   },
+  "graph": {
+    "width": 720,
+    "height": 469,
+    "alt": "The commit graph in the right sidebar: lanes, branch pills and a tag"
+  },
   "live-changes": {
     "width": 720,
     "height": 299,

@@ -33,7 +33,7 @@ export const chapters: Chapter[] = [
     title: 'Your repo, live',
     lede: 'Watch the agent’s edits land as they happen, ask about the lines you don’t like, and commit without leaving the window.',
     capabilities: ['d-files', 'd-changes', 'd-commit', 'd-branches', 'd-graph', 'e-live-changes', 'e-ask'],
-    visual: { shots: ['changes', 'live-changes', 'ask', 'commit'] },
+    visual: { shots: ['changes', 'live-changes', 'ask', 'commit', 'graph'] },
   },
   {
     id: 'script',
