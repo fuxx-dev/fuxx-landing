@@ -52,7 +52,7 @@ export const inventory: Capability[] = [
   { id: 'g-persistent', group: 'G', text: 'Opt in and sessions keep running after you quit. Reopen and they’re live.' },
   // H. Terminal niceties
   { id: 'h-gpu-terminal', group: 'H', text: 'A real GPU terminal on alacritty: scrollback, clickable links, ligatures, Nerd Font prompt icons.' },
-  { id: 'h-low-cpu', group: 'H', text: 'Idles at low CPU, even with the glow on.' },
+  { id: 'h-low-cpu', group: 'H', text: 'Idles at low CPU.' },
   { id: 'h-shell-cards', group: 'H', text: 'Chat-style shell tabs: every finished command becomes a card with Copy and Rerun.' },
   { id: 'h-command-blocks', group: 'H', text: 'Command blocks: a slim bar per command, red when it failed. ⇧⌘C copies its output.', keys: '⇧⌘↑ / ⇧⌘↓' },
   { id: 'h-cursor', group: 'H', text: 'A cursor that glides and breathes instead of blinking, with an optional comet trail or sparks.' },

@@ -39,7 +39,7 @@ export function TypedTerminal({
   }, [reduced, inView])
 
   useEffect(() => {
-    if (!started || p.line >= lines.length) return
+    if (reduced || !started || p.line >= lines.length) return
     const cur = lines[p.line]
     const typing = cur.kind === 'cmd' && p.chars < cur.text.length
     const id = window.setTimeout(
@@ -49,11 +49,13 @@ export function TypedTerminal({
     return () => window.clearTimeout(id)
   }, [started, p, lines])
 
+  // Reduced motion can arrive after mount (it settles after hydration): render the end state, type nothing.
+  const shown = reduced ? done : p
   const transcript = lines.map((l) => (l.kind === 'cmd' ? `${PROMPT} ${l.text}` : l.text)).join('\n')
   const visible: { l: ReplayLine; text: string }[] = lines
-    .slice(0, p.line)
+    .slice(0, shown.line)
     .map((l) => ({ l, text: l.text }))
-  const current = p.line < lines.length ? lines[p.line] : null
+  const current = shown.line < lines.length ? lines[shown.line] : null
   const typingNow = started && current?.kind === 'cmd'
 
   return (
@@ -64,7 +66,7 @@ export function TypedTerminal({
         ))}
         {current ? (
           typingNow ? (
-            <Line kind="cmd" text={current.text.slice(0, p.chars)} caret />
+            <Line kind="cmd" text={current.text.slice(0, shown.chars)} caret />
           ) : (
             <Line kind="cmd" text="" caret />
           )

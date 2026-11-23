@@ -49,3 +49,9 @@ test('paused: in view but does not type until unpaused', async () => {
   for (let i = 0; i < 400; i++) await act(async () => { vi.advanceTimersByTime(100) })
   expect(container.textContent).toContain(replays.cli[replays.cli.length - 1].text)
 })
+
+test('reduced motion arriving after mount shows the end state at once, without typing', async () => {
+  const { container, rerender } = render(<TypedTerminal script="cli" />)
+  rerender(<TypedTerminal script="cli" reduced />)
+  for (const t of lines()) expect(container.textContent).toContain(t)
+})

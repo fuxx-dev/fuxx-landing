@@ -33,3 +33,17 @@ test('reduced motion: static hero even with WebGL', async () => {
   expect(screen.getByLabelText('fuxx mascot')).toBeTruthy()
   expect(loadScene).not.toHaveBeenCalled()
 })
+
+test('a lost WebGL context brings the static mascot back', async () => {
+  webgl.ok = true; motion.reduced = false
+  const scene = { start: vi.fn(), stop: vi.fn(), setPointer: vi.fn(), dispose: vi.fn() }
+  loadScene.mockResolvedValue({ createHeroScene: () => scene })
+  const { container } = render(<Hero />)
+  await act(async () => { vi.advanceTimersByTime(1000) })
+  await act(async () => { await Promise.resolve() })
+  const hero = container.querySelector('.hero')!
+  expect(hero.classList.contains('hero--live')).toBe(true)
+  await act(async () => { container.querySelector('canvas')!.dispatchEvent(new Event('webglcontextlost')) })
+  expect(hero.classList.contains('hero--live')).toBe(false)
+  expect(scene.stop).toHaveBeenCalled()
+})

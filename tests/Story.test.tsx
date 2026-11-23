@@ -33,3 +33,11 @@ test('wide screen with motion: the story pins', () => {
   render(<Story />)
   expect(spy.mock.calls.some(([v]) => v && (v as ScrollTrigger.Vars).pin)).toBe(true)
 })
+
+import { chaptersFit } from '../src/sections/Story'
+
+test('chaptersFit: pin only when the tallest chapter fits its box', () => {
+  expect(chaptersFit([300, 420, 500], 520)).toBe(true)
+  expect(chaptersFit([300, 820, 500], 640)).toBe(false)
+  expect(chaptersFit([], 0)).toBe(true)
+})

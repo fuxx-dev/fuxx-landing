@@ -10,7 +10,7 @@
     "test": "vitest run --exclude tests/build.test.ts",
     "test:build": "vitest run tests/build.test.ts",
     "preview": "vite preview",
-    "deploy": "pnpm build && wrangler deploy",
+    "ship": "pnpm build && wrangler deploy",
     "sync-shots": "node scripts/sync-shots.mjs"
   },
   "dependencies": {

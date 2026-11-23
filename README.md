@@ -38,5 +38,5 @@ shown, or if the page shows one that isn't listed.
 ## Deploy
 
 ```sh
-pnpm deploy       # build + wrangler deploy (Worker "fuxx-landing", custom domain fuxx.fitzfitz.site)
+pnpm ship         # build + wrangler deploy (not `pnpm deploy`: that's a built-in pnpm command) (Worker "fuxx-landing", custom domain fuxx.fitzfitz.site)
 ```

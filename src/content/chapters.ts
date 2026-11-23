@@ -18,7 +18,7 @@ export const chapters: Chapter[] = [
     id: 'agent-tabs',
     title: 'Agent tabs & the agent box',
     lede: 'Claude Code and agy as a proper chat: permissions you can click, tools you can open, subagents you can follow, usage you can see.',
-    capabilities: ['b-providers', 'b-chat', 'b-permissions', 'b-top-bar', 'b-agent-box', 'b-attach-commands', 'b-image-pills', 'b-drag-block', 'b-subagents', 'b-usage'],
+    capabilities: ['b-providers', 'b-chat', 'b-permissions', 'b-agent-box', 'b-attach-commands', 'b-subagents', 'b-usage'],
     visual: { shots: ['agent-chat', 'agent-permission', 'agent-subagents', 'usage'] },
   },
   {

@@ -15,7 +15,7 @@ export function Plugins() {
         <div>
           <p className="plugins__lede">
             A plugin is a public GitHub repo with a <code>fuxx-plugin.conf</code> at the top. Install it from
-            Settings → Plugins, remove it from the same page. Updates come from the repo.
+            Settings → Plugins, remove it from the same page. When the repo has something new, an Update button shows up there.
           </p>
           <ul className="plugins__caps">
             {PLUGIN_CAPABILITIES.map((id) => (

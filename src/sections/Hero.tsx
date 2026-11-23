@@ -59,6 +59,12 @@ export function Hero() {
       scene?.setPointer((e.clientX / window.innerWidth) * 2 - 1, -((e.clientY / window.innerHeight) * 2 - 1))
     }
     window.addEventListener('pointermove', onPointer, { passive: true })
+    // Sleep/wake or a GPU switch can drop the context: stop and show the static mascot again.
+    const onLost = () => {
+      scene?.stop()
+      setLive(false)
+    }
+    canvas.addEventListener('webglcontextlost', onLost)
 
     const boot = () => {
       loadHeroScene()
@@ -82,6 +88,7 @@ export function Hero() {
       io.disconnect()
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('pointermove', onPointer)
+      canvas.removeEventListener('webglcontextlost', onLost)
       scene?.dispose()
     }
   }, [])

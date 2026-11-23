@@ -5,8 +5,9 @@ export type Card = {
   visual?: { shot: string } | { replay: 'ssh' } | { demo: 'cursor' | 'sounds' }
 }
 
-/** Everything the story chapters don't cover (groups E, F, G, H, J). */
+/** Everything the story chapters don't cover (groups E, F, G, H, J, and agent-tab details). */
 export const grid: Card[] = [
+  { id: 'agent-extras', title: 'Agent tabs, the small stuff', capabilities: ['b-top-bar', 'b-image-pills', 'b-drag-block'] },
   { id: 'diffs', title: 'Diffs worth reading', capabilities: ['e-diff-cards'], visual: { shot: 'diff-cards' } },
   { id: 'code', title: 'Code, read-only', capabilities: ['e-viewer', 'e-code-view'] },
   { id: 'markdown', title: 'A Markdown reader', capabilities: ['e-markdown'], visual: { shot: 'md-reader' } },

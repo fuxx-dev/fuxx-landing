@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { chapters, type Chapter } from '../content/chapters'
 import { byId } from '../content/inventory'
 import { FuxxWindow } from '../components/FuxxWindow'
@@ -9,12 +9,19 @@ import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { useReducedMotion } from '../lib/motion'
 import './story.css'
 
+/** The pinned layout shows one chapter at a time in a fixed box; it only works if the tallest one fits. */
+export function chaptersFit(heights: number[], box: number): boolean {
+  return heights.every((h) => h <= box)
+}
+
 const PIN_QUERY = '(min-width: 900px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)'
 
 export function Story() {
   const sectionRef = useRef<HTMLElement>(null)
   const pinRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<ScrollTrigger | null>(null)
+  const chaptersRef = useRef<HTMLOListElement>(null)
+  const tooTallRef = useRef(false)
   const [pinned, setPinned] = useState(false)
   const [active, setActive] = useState(0)
   const [shot, setShot] = useState(0)
@@ -24,6 +31,7 @@ export function Story() {
     () => {
       const mm = gsap.matchMedia()
       mm.add(PIN_QUERY, () => {
+        if (tooTallRef.current) return
         setPinned(true)
         const n = chapters.length
         triggerRef.current = ScrollTrigger.create({
@@ -51,6 +59,21 @@ export function Story() {
     { scope: sectionRef },
   )
 
+  // After the pinned layout renders, check every chapter fits its box; if one doesn't, go back to stacked.
+  useEffect(() => {
+    const box = chaptersRef.current
+    if (!pinned || !box) return
+    const heights = Array.from(box.children, (li) => (li as HTMLElement).scrollHeight)
+    if (chaptersFit(heights, box.clientHeight)) return
+    tooTallRef.current = true
+    triggerRef.current?.kill(true)
+    triggerRef.current = null
+    setPinned(false)
+    setActive(0)
+    setShot(0)
+    requestAnimationFrame(() => ScrollTrigger.refresh())
+  }, [pinned])
+
   const goTo = (i: number) => {
     const st = triggerRef.current
     if (!st) return
@@ -75,7 +98,7 @@ export function Story() {
                 ))}
               </nav>
             ) : null}
-            <ol className="story__chapters">
+            <ol ref={chaptersRef} className="story__chapters">
               {chapters.map((ch, i) => (
                 <li key={ch.id} className={`story__chapter ${i === active ? 'is-active' : ''}`} aria-current={pinned && i === active ? 'step' : undefined}>
                   <p className="story__num">0{i + 1}</p>
