@@ -44,9 +44,9 @@ test('wide screen with motion: the story pins', () => {
 
 import { chaptersFit } from '../src/sections/Story'
 
-test('the activity chapter draws its tracks demo, labelled for screen readers', () => {
+test('the activity chapter shows the real file-tracks render', () => {
   render(<Story />)
-  expect(screen.getByRole('img', { name: /agent step in fuxx/ })).toBeTruthy()
+  expect(screen.getByRole('img', { name: /busy agent step drawn as file tracks/ })).toBeTruthy()
 })
 
 test('chaptersFit: pin only when the tallest chapter fits its box', () => {

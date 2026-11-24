@@ -16,7 +16,7 @@
   },
   "agent-permission": {
     "width": 640,
-    "height": 248,
+    "height": 249,
     "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"
   },
   "agent-subagents": {
@@ -26,7 +26,7 @@
   },
   "usage": {
     "width": 640,
-    "height": 486,
+    "height": 487,
     "alt": "The live usage popover: percent used and when each limit resets"
   },
   "chat-select": {
@@ -41,22 +41,22 @@
   },
   "changes": {
     "width": 720,
-    "height": 469,
+    "height": 470,
     "alt": "The right sidebar's Changes panel with staged and unstaged files and the branch bar"
   },
   "commit": {
     "width": 720,
-    "height": 469,
+    "height": 470,
     "alt": "Committing from the Changes panel while the agent writes the message"
   },
   "graph": {
     "width": 720,
-    "height": 469,
+    "height": 470,
     "alt": "The commit graph in the right sidebar: lanes, branch pills and a tag"
   },
   "live-changes": {
     "width": 720,
-    "height": 299,
+    "height": 300,
     "alt": "A file tab where the lines the agent just changed glow"
   },
   "ask": {
@@ -103,5 +103,70 @@
     "width": 360,
     "height": 199,
     "alt": "The Update Available button in the sidebar"
+  },
+  "tracks": {
+    "width": 720,
+    "height": 279,
+    "alt": "A busy agent step drawn as file tracks: a row per file with a bead per call, a Checks track, and summaries like “edited · +2 −1” and “tests failed · cli:: 1 of 3”"
+  },
+  "steps": {
+    "width": 720,
+    "height": 254,
+    "alt": "Smaller steps as plain rows: “Run the CLI tests” with its cargo test command dimmed and a “2 passed” chip, then an edit and a read"
+  },
+  "ledger": {
+    "width": 720,
+    "height": 472,
+    "alt": "The turn ledger opened from the agent box’s tab: four changed files with their line counts, and each check’s runs, failed then passed"
+  },
+  "lanes-row": {
+    "width": 720,
+    "height": 198,
+    "alt": "Main and Explore pills above the chat; in the main chat the Explore subagent’s row wears a robot and reads “Running Read · 0:12”"
+  },
+  "lanes-relay": {
+    "width": 720,
+    "height": 553,
+    "alt": "Messaging the running Explore subagent from its lane: one message delivered, one Main didn’t pass on with Send again, one waiting for Main’s next step"
+  },
+  "lanes-closing": {
+    "width": 720,
+    "height": 108,
+    "alt": "A finished subagent’s box: “Explore finished in 1:33”, with Ask Main about it and Back to Main"
+  },
+  "question": {
+    "width": 720,
+    "height": 410,
+    "alt": "Claude’s question as a card: which test runner to set up, numbered choices with a code preview, Next and Skip"
+  },
+  "question-agy": {
+    "width": 720,
+    "height": 320,
+    "alt": "agy’s question as the same card, with Send as message: agy couldn’t wait, so the picks go back as a new message"
+  },
+  "rewind": {
+    "width": 720,
+    "height": 273,
+    "alt": "Copy, Rewind and Fork buttons beside each message you sent, and a stopped reply offering “Rewind to edit your message”"
+  },
+  "fork": {
+    "width": 720,
+    "height": 541,
+    "alt": "A forked Claude tab beside the original: “Forked from Fix the failing parser test”, the next message ready to edit in the box"
+  },
+  "new-tab-menu": {
+    "width": 720,
+    "height": 338,
+    "alt": "The pane’s + menu searching “web”: open a URL, matching tabs, browser history and files"
+  },
+  "suggestion": {
+    "width": 360,
+    "height": 107,
+    "alt": "The agent box holding Claude’s suggested next message in grey italic, with a Tab hint, above the model menu"
+  },
+  "files-menu": {
+    "width": 360,
+    "height": 452,
+    "alt": "Right-click on a file in the Files tree: Open, Open to the Side, Add to Claude Chat, Show Changes, Reveal in Finder, Copy Path, Rename, Move to Trash"
   }
 }
