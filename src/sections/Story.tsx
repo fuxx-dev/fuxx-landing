@@ -5,6 +5,7 @@ import { FuxxWindow } from '../components/FuxxWindow'
 import { Keys } from '../components/Keys'
 import { Shot } from '../components/Shot'
 import { TypedTerminal } from '../components/TypedTerminal'
+import { TracksDemo } from '../components/TracksDemo'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { useReducedMotion } from '../lib/motion'
 import './story.css'
@@ -145,6 +146,7 @@ export function Story() {
 
 function Visual({ chapter, index, reduced, paused = false }: { chapter: Chapter; index: number; reduced: boolean; paused?: boolean }) {
   if ('replay' in chapter.visual) return <TypedTerminal script={chapter.visual.replay} reduced={reduced} paused={paused} />
+  if ('demo' in chapter.visual) return <TracksDemo />
   const shots = chapter.visual.shots
   return (
     <div className="story__shots">

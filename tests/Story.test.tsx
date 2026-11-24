@@ -5,11 +5,19 @@ import { chapters } from '../src/content/chapters'
 import { inventory } from '../src/content/inventory'
 import { Story } from '../src/sections/Story'
 
-const TITLES = ['Knows your agents', 'Agent tabs & the agent box', 'Workspaces, panes, tabs', 'Your repo, live', 'Script it']
+const TITLES = [
+  'Knows your agents',
+  'Shows its work',
+  'Subagents, out in the open',
+  'Agent tabs with an undo',
+  'Workspaces, panes, tabs',
+  'Your repo, live',
+  'Script it',
+]
 
 afterEach(() => { setMatchMedia(() => false); vi.restoreAllMocks() })
 
-test('five chapters, in order', () => {
+test('seven chapters, in order', () => {
   render(<Story />)
   const heads = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
   expect(heads).toEqual(TITLES)
@@ -35,6 +43,11 @@ test('wide screen with motion: the story pins', () => {
 })
 
 import { chaptersFit } from '../src/sections/Story'
+
+test('the activity chapter draws its tracks demo, labelled for screen readers', () => {
+  render(<Story />)
+  expect(screen.getByRole('img', { name: /agent step in fuxx/ })).toBeTruthy()
+})
 
 test('chaptersFit: pin only when the tallest chapter fits its box', () => {
   expect(chaptersFit([300, 420, 500], 520)).toBe(true)

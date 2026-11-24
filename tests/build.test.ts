@@ -30,8 +30,9 @@ test('no personal paths leak into the page', () => {
   expect(html).not.toContain('/Users/')
 })
 
-test('all five chapter titles are in the prerendered page', () => {
-  for (const t of ['Knows your agents', 'Agent tabs &amp; the agent box', 'Workspaces, panes, tabs', 'Your repo, live', 'Script it']) {
+test('all seven chapter titles are in the prerendered page', () => {
+  const titles = ['Knows your agents', 'Shows its work', 'Subagents, out in the open', 'Agent tabs with an undo', 'Workspaces, panes, tabs', 'Your repo, live', 'Script it']
+  for (const t of titles) {
     expect(html).toContain(t)
   }
 })
