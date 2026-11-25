@@ -1,5 +1,6 @@
 import { DownloadButton } from './DownloadButton'
 import { LogoMark } from './LogoMark'
+import { ScrollProgress } from './ScrollProgress'
 import { StarButton } from './StarButton'
 import './header.css'
 
@@ -19,6 +20,7 @@ export function Header() {
           <DownloadButton compact />
         </div>
       </div>
+      <ScrollProgress />
     </header>
   )
 }

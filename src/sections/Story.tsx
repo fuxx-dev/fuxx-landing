@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
 import { chapters, type Chapter } from '../content/chapters'
 import { byId } from '../content/inventory'
 import { FuxxWindow } from '../components/FuxxWindow'
@@ -15,6 +16,10 @@ export function chaptersFit(heights: number[], box: number): boolean {
   return heights.every((h) => h <= box)
 }
 
+/** Chapter swaps while pinned: the old one leaves the way you scrolled, the new one comes from the other side. */
+const SWAP = { type: 'spring', stiffness: 260, damping: 30 } as const
+const STILL = { duration: 0 } as const
+
 const PIN_QUERY = '(min-width: 900px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)'
 
 export function Story() {
@@ -27,6 +32,9 @@ export function Story() {
   const [active, setActive] = useState(0)
   const [shot, setShot] = useState(0)
   const reduced = useReducedMotion()
+  // The render that pins jumps straight to its layout; swaps after that spring.
+  const [swapping, setSwapping] = useState(false)
+  useEffect(() => setSwapping(pinned), [pinned])
 
   useGSAP(
     () => {
@@ -94,6 +102,7 @@ export function Story() {
               <nav className="story__nav" aria-label="Chapters">
                 {chapters.map((ch, i) => (
                   <button key={ch.id} type="button" className={i === active ? 'is-active' : ''} onClick={() => goTo(i)}>
+                    {i === active ? <motion.span layoutId="story-nav-pill" className="story__pill" transition={SWAP} /> : null}
                     <span className="story__nav-num">0{i + 1}</span> {ch.title}
                   </button>
                 ))}
@@ -101,7 +110,15 @@ export function Story() {
             ) : null}
             <ol ref={chaptersRef} className="story__chapters">
               {chapters.map((ch, i) => (
-                <li key={ch.id} className={`story__chapter ${i === active ? 'is-active' : ''}`} aria-current={pinned && i === active ? 'step' : undefined}>
+                <motion.li
+                  key={ch.id}
+                  className={`story__chapter ${i === active ? 'is-active' : ''}`}
+                  aria-current={pinned && i === active ? 'step' : undefined}
+                  initial={false}
+                  // Stacked (and on the way back to stacked): every chapter plainly shown, no motion.
+                  animate={pinned ? { opacity: i === active ? 1 : 0, y: i === active ? 0 : i < active ? -18 : 18 } : { opacity: 1, y: 0 }}
+                  transition={pinned && swapping ? SWAP : STILL}
+                >
                   <p className="story__num">0{i + 1}</p>
                   <h3 className="story__title">
                     <Icon name={ch.icon} size="0.8em" className="story__icon" />
@@ -124,7 +141,7 @@ export function Story() {
                       <Visual chapter={ch} index={0} reduced={reduced} />
                     </div>
                   ) : null}
-                </li>
+                </motion.li>
               ))}
             </ol>
           </div>

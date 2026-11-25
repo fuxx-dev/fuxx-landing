@@ -1,49 +1,33 @@
-import { useRef } from 'react'
 import { grid, type Card } from '../content/grid'
 import { byId } from '../content/inventory'
 import { Icon } from '../components/Icon'
 import { Keys } from '../components/Keys'
 import { PlanDemo } from '../components/PlanDemo'
 import { Shot } from '../components/Shot'
+import { TiltCard } from '../components/TiltCard'
 import { TypedTerminal } from '../components/TypedTerminal'
-import { gsap, useGSAP } from '../lib/gsap'
-import { prefersReducedMotion, useReducedMotion } from '../lib/motion'
+import { useReducedMotion } from '../lib/motion'
 import './grid.css'
 
 export function Grid() {
-  const ref = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
-  useGSAP(
-    () => {
-      if (prefersReducedMotion()) return
-      gsap.from('.card', {
-        y: 24,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-        stagger: 0.05,
-        scrollTrigger: { trigger: '.grid__cards', start: 'top 82%', once: true },
-      })
-    },
-    { scope: ref },
-  )
   return (
-    <section ref={ref} className="grid wrap" aria-labelledby="grid-title">
+    <section className="grid wrap" aria-labelledby="grid-title">
       <p className="kicker">And the rest</p>
       <h2 id="grid-title" className="section-title">Everything else it does, which is a lot.</h2>
       <div className="grid__cards">
-        {grid.map((card) => (
-          <CardView key={card.id} card={card} reduced={reduced} />
+        {grid.map((card, i) => (
+          <CardView key={card.id} card={card} reduced={reduced} delay={(i % 3) * 0.06} />
         ))}
       </div>
     </section>
   )
 }
 
-function CardView({ card, reduced }: { card: Card; reduced: boolean }) {
+function CardView({ card, reduced, delay }: { card: Card; reduced: boolean; delay: number }) {
   const v = card.visual
   return (
-    <article className={`card ${v ? 'card--visual' : ''}`}>
+    <TiltCard className={`card ${v ? 'card--visual' : ''}`} reveal={{ delay }}>
       <h3 className="card__title">
         <Icon name={card.icon} size="0.85em" className="card__icon" />
         {card.title}
@@ -68,7 +52,7 @@ function CardView({ card, reduced }: { card: Card; reduced: boolean }) {
           {'demo' in v && v.demo === 'plan' ? <PlanDemo reduced={reduced} /> : null}
         </div>
       ) : null}
-    </article>
+    </TiltCard>
   )
 }
 

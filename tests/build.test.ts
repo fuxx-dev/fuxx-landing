@@ -61,3 +61,8 @@ test('one h1, and the page has a main landmark', () => {
   expect((html.match(/<h1\b/g) ?? []).length).toBe(1)
   expect(html).toContain('<main')
 })
+
+test('nothing in the prerendered page starts hidden (effects hide things only after mount)', () => {
+  expect(html).not.toMatch(/style="[^"]*opacity:\s*0[;"]/)
+  expect(html).not.toMatch(/style="[^"]*visibility:\s*hidden/)
+})

@@ -55,3 +55,14 @@ test('chaptersFit: pin only when the tallest chapter fits its box', () => {
   expect(chaptersFit([300, 820, 500], 640)).toBe(false)
   expect(chaptersFit([], 0)).toBe(true)
 })
+
+test('pinned: the chapter nav has one active button, carrying the sliding pill', () => {
+  setMatchMedia((q) => q.includes('min-width') || q.includes('no-preference'))
+  const { container } = render(<Story />)
+  const buttons = container.querySelectorAll('.story__nav button')
+  expect(buttons).toHaveLength(chapters.length)
+  expect(container.querySelectorAll('.story__nav button.is-active')).toHaveLength(1)
+  const pills = container.querySelectorAll('.story__pill')
+  expect(pills).toHaveLength(1)
+  expect(pills[0].closest('button')!.classList.contains('is-active')).toBe(true)
+})

@@ -21,7 +21,7 @@ p { margin: 0; }
 :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
 .wrap { width: min(var(--maxw), 100% - 2 * var(--gutter)); margin-inline: auto; }
 /* Lucide icons (src/components/Icon.tsx): sit on the text's centre line, never squeezed. */
-.icon { flex: none; vertical-align: -0.15em; }
+.icon { display: inline-block; flex: none; vertical-align: -0.15em; }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;

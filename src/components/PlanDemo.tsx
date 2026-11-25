@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { Icon } from './Icon'
 import './plan-demo.css'
 
@@ -32,6 +33,9 @@ const LINES: Line[] = [
   { kind: 'h', text: 'Verification' },
   { kind: 'code', text: 'cargo test retry' },
 ]
+
+/** The card leaves as the folded line arrives (and the line leaves when a new round starts). */
+const LEAVE = { opacity: 0, scale: 0.97, transition: { duration: 0.22 } } as const
 
 const LAST = PLAN_STEPS.length - 1
 const TOTAL = PLAN_STEPS.reduce((ms, s) => ms + s.ms, 0)
@@ -104,54 +108,58 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
     <div ref={ref} className={`plan-demo is-${name}`} aria-hidden="true">
       <div className="pd-chat">
         <div className="pd-you">Retries hit the old host after a failover. Plan the fix first.</div>
-        {approved ? (
-          <div className="pd-folded">
-            <Icon name="listChecks" size={14} className="pd-icon" />
-            <span className="pd-folded__title">Retry against the current endpoint</span>
-            <span className="pd-dim">4 steps</span>
-            <span className="pd-ok">
-              Approved · auto-accept edits <Icon name="check" size={12} />
-            </span>
-          </div>
-        ) : (
-          <div className="pd-card">
-            <div className="pd-head">
+        <AnimatePresence mode="popLayout" initial={false}>
+          {approved ? (
+            <motion.div key="folded" className="pd-folded" exit={LEAVE}>
               <Icon name="listChecks" size={14} className="pd-icon" />
-              <span className="pd-who">Claude’s plan</span>
-              <span className="pd-file">
-                retry-current-endpoint.md <Icon name="externalLink" size={11} />
+              <span className="pd-folded__title">Retry against the current endpoint</span>
+              <span className="pd-dim">4 steps</span>
+              <span className="pd-ok">
+                Approved · auto-accept edits <Icon name="check" size={12} />
               </span>
-            </div>
-            <div className="pd-title">Retry against the current endpoint</div>
-            <div className={`pd-body ${folded ? 'is-folded' : ''}`}>
-              {LINES.slice(0, shown).map((l, i) => (
-                <div key={i} className={`pd-line pd-line--${l.kind}`}>
-                  {l.kind === 'li' ? <span className="pd-n">{l.n}.</span> : null}
-                  {l.text}
-                </div>
-              ))}
-            </div>
-            {folded ? (
-              <div ref={moreRef} className="pd-more">
-                Show the whole plan <Icon name="chevronDown" size={12} />
+            </motion.div>
+          ) : (
+            <motion.div key={`card-${round}`} className="pd-card" exit={LEAVE}>
+              <div className="pd-head">
+                <Icon name="listChecks" size={14} className="pd-icon" />
+                <span className="pd-who">Claude’s plan</span>
+                <span className="pd-file">
+                  retry-current-endpoint.md <Icon name="externalLink" size={11} />
+                </span>
               </div>
-            ) : null}
-            <div className="pd-actions">
-              <span ref={approveRef} className={`pd-btn pd-btn--pri ${name === 'pressing' ? 'is-pressed' : ''}`}>
-                Approve · auto-accept edits <Icon name="cornerDownLeft" size={12} />
-              </span>
-              <span className="pd-btn">Approve · ask per edit</span>
-              <span className="pd-quiet">Keep planning…</span>
-            </div>
-          </div>
-        )}
-        {approved ? (
-          <div className="pd-step">
-            <span className="pd-tile">
-              <Icon name="pencil" size={12} />
-            </span> Edit retry.rs <span className="pd-plus">+1</span> <span className="pd-minus">−1</span>
-          </div>
-        ) : null}
+              <div className="pd-title">Retry against the current endpoint</div>
+              <div className={`pd-body ${folded ? 'is-folded' : ''}`}>
+                {LINES.slice(0, shown).map((l, i) => (
+                  <div key={i} className={`pd-line pd-line--${l.kind}`}>
+                    {l.kind === 'li' ? <span className="pd-n">{l.n}.</span> : null}
+                    {l.text}
+                  </div>
+                ))}
+              </div>
+              {folded ? (
+                <div ref={moreRef} className="pd-more">
+                  Show the whole plan <Icon name="chevronDown" size={12} />
+                </div>
+              ) : null}
+              <div className="pd-actions">
+                <span ref={approveRef} className={`pd-btn pd-btn--pri ${name === 'pressing' ? 'is-pressed' : ''}`}>
+                  Approve · auto-accept edits <Icon name="cornerDownLeft" size={12} />
+                </span>
+                <span className="pd-btn">Approve · ask per edit</span>
+                <span className="pd-quiet">Keep planning…</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence initial={false}>
+          {approved ? (
+            <motion.div key="step" className="pd-step" exit={LEAVE}>
+              <span className="pd-tile">
+                <Icon name="pencil" size={12} />
+              </span> Edit retry.rs <span className="pd-plus">+1</span> <span className="pd-minus">−1</span>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
       <div className="pd-box">
         <span className="pd-placeholder">{approved ? 'Add a note. Claude reads it after this step…' : 'Tell Claude what to change in the plan…'}</span>
