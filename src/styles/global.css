@@ -41,4 +41,4 @@ p { margin: 0; }
    class when JS is on and motion is allowed, so what the intro brings in never paints whole and then
    vanishes. The intro lifts it once its start state is set; a safety timeout lifts it if JS never runs.
    No JS or reduced motion: the class never appears, and the page reads as served. */
-html.intro-pending :is(.hdr, .hero__kicker-text, .hero__title, .hero__lede, .hero__cta .btn, .hero__cta .dl__meta, .hero__stage-in) { opacity: 0; }
+html.intro-pending :is(.hdr, .hero__kicker-text, .hero__title, .hero__lede, .hero__cta .btn-slot, .hero__cta .dl__meta, .hero__stage-in) { opacity: 0; }

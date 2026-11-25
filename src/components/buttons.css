@@ -4,6 +4,9 @@
   font: 600 var(--step-0)/1 var(--mono); text-decoration: none; white-space: nowrap;
   transition: box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
 }
+/* Each button sits in a slot (the hero intro animates the slot; Motion owns the button). */
+.btn-slot { display: inline-flex; }
+.btn-slot > .btn { flex: 1; }
 .btn__icon { font-size: 1.1em; }
 /* Every button carries a 1px border, so a primary and a ghost side by side are the same height. */
 .btn--primary { background: var(--green); border-color: var(--green); color: #031208; box-shadow: 0 0 24px -6px var(--green-glow); }

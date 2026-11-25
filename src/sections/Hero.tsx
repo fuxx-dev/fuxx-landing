@@ -8,6 +8,7 @@ import { HeroFallback } from './HeroFallback'
 import { gsap, useGSAP } from '../lib/gsap'
 import { playIntro } from '../lib/intro'
 import { introWasSkipped, releaseIntroPending } from '../lib/intro-pending'
+import { rafThrottle } from '../lib/raf'
 import './hero.css'
 
 const COLORS = { green: '#00ff66', working: '#fab387', waiting: '#f38ba8', done: '#a6e3a1' }
@@ -35,13 +36,13 @@ export function Hero() {
   // The first-load intro, on every load, set up before the first client paint. Until then the head
   // script (lib/intro-pending) keeps its targets hidden; with the start state set, the page is shown.
   // If that script's safety timeout already showed the page, the intro doesn't play over it.
-  // A scroll, swipe or key cuts it to its end.
+  // A scroll (wheel, swipe, scrollbar drag, restored position) or a key cuts it to its end.
   useLayoutEffect(() => {
     const intro = playIntro(document.body, { reduced: prefersReducedMotion() || introWasSkipped() })
     releaseIntroPending()
     if (!intro.timeline) return
     const cut = () => intro.cut()
-    const events = ['wheel', 'touchmove', 'keydown'] as const
+    const events = ['wheel', 'touchmove', 'keydown', 'scroll'] as const
     events.forEach((e) => window.addEventListener(e, cut, { once: true, passive: true }))
     return () => {
       events.forEach((e) => window.removeEventListener(e, cut))
@@ -49,21 +50,29 @@ export function Hero() {
     }
   }, [])
 
-  // The spotlight follows the pointer while it is over the hero.
+  // The spotlight follows the pointer while it is over the hero: once a frame, written on the spot
+  // itself (its own transform), so the rest of the hero is never restyled by a pointer move.
   useEffect(() => {
     const section = sectionRef.current
-    if (!section || prefersReducedMotion()) return
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType === 'touch') return
+    const spot = section?.querySelector<HTMLElement>('.hero__spot')
+    if (!section || !spot || prefersReducedMotion()) return
+    const follow = rafThrottle((x: number, y: number) => {
       const r = section.getBoundingClientRect()
-      section.style.setProperty('--sx', `${Math.round(e.clientX - r.left)}px`)
-      section.style.setProperty('--sy', `${Math.round(e.clientY - r.top)}px`)
-      section.classList.add('hero--spot')
+      spot.style.setProperty('--sx', `${Math.round(x - r.left)}px`)
+      spot.style.setProperty('--sy', `${Math.round(y - r.top)}px`)
+      spot.classList.add('is-on')
+    })
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'touch') follow(e.clientX, e.clientY)
     }
-    const onLeave = () => section.classList.remove('hero--spot')
+    const onLeave = () => {
+      follow.cancel()
+      spot.classList.remove('is-on')
+    }
     section.addEventListener('pointermove', onMove, { passive: true })
     section.addEventListener('pointerleave', onLeave)
     return () => {
+      follow.cancel()
       section.removeEventListener('pointermove', onMove)
       section.removeEventListener('pointerleave', onLeave)
     }

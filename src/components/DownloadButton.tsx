@@ -22,18 +22,21 @@ export function DownloadButton({
   const pull = useMagnet(ref, 6, magnetic)
   return (
     <div className={`dl ${compact ? 'dl--compact' : ''}`}>
-      <motion.a
-        ref={ref}
-        className="btn btn--primary"
-        href={release.zipUrl}
-        style={magnetic ? pull : undefined}
-        whileHover={PRESS.hover}
-        whileTap={PRESS.tap}
-      >
-        <Icon name="download" className="btn__icon" />
-        {compact ? 'Download' : 'Download for macOS'}
-        {compact ? <span className="visually-hidden"> for macOS</span> : null}
-      </motion.a>
+      {/* The slot is what the hero intro animates; Motion owns the button's own transform. */}
+      <span className="btn-slot btn-slot--download">
+        <motion.a
+          ref={ref}
+          className="btn btn--primary"
+          href={release.zipUrl}
+          style={magnetic ? pull : undefined}
+          whileHover={PRESS.hover}
+          whileTap={PRESS.tap}
+        >
+          <Icon name="download" className="btn__icon" />
+          {compact ? 'Download' : 'Download for macOS'}
+          {compact ? <span className="visually-hidden"> for macOS</span> : null}
+        </motion.a>
+      </span>
       {showMeta ? (
         <p className="dl__meta">
           {release.version ? <>v{release.version} · </> : null}macOS 11+ · Apple Silicon + Intel

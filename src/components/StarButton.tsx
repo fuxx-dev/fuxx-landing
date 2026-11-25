@@ -41,21 +41,24 @@ export function StarButton({ compact = false, magnetic = false }: { compact?: bo
   const label = starLabel(stars)
   const width = starLabel(target)?.length ?? 0
   return (
-    <motion.a
-      ref={ref}
-      style={magnetic ? pull : undefined}
-      className={`btn btn--ghost ${compact ? 'btn--compact' : ''}`}
-      href={REPO_URL}
-      whileHover={PRESS.hover}
-      whileTap={PRESS.tap}
-    >
-      <Icon name="star" className="btn__icon" />
-      {compact ? 'Star' : 'Star on GitHub'}
-      {label ? (
-        <span className="btn__count" style={{ minWidth: `calc(${width}ch + 0.6em)` }}>
-          {label}
-        </span>
-      ) : null}
-    </motion.a>
+    // The slot is what the hero intro animates; Motion owns the button's own transform.
+    <span className="btn-slot btn-slot--star">
+      <motion.a
+        ref={ref}
+        style={magnetic ? pull : undefined}
+        className={`btn btn--ghost ${compact ? 'btn--compact' : ''}`}
+        href={REPO_URL}
+        whileHover={PRESS.hover}
+        whileTap={PRESS.tap}
+      >
+        <Icon name="star" className="btn__icon" />
+        {compact ? 'Star' : 'Star on GitHub'}
+        {label ? (
+          <span className="btn__count" style={{ minWidth: `calc(${width}ch + 0.6em)` }}>
+            {label}
+          </span>
+        ) : null}
+      </motion.a>
+    </span>
   )
 }

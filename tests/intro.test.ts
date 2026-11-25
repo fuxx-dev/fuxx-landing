@@ -16,7 +16,7 @@ function page(): HTMLElement {
       <p class="hero__kicker"><span class="hero__dot"></span> <span class="hero__kicker-text">a terminal for people who run AI coding agents</span></p>
       <h1 class="hero__title">Your not-so-friendly <br class="hero__br">neighborhood CLI.</h1>
       <p class="hero__lede">A native, GPU-fast terminal.</p>
-      <div class="hero__cta"><a class="btn">Download</a><a class="btn">Star</a></div>
+      <div class="hero__cta"><span class="btn-slot"><a class="btn">Download</a></span><p class="dl__meta">v1</p><span class="btn-slot"><a class="btn">Star</a></span></div>
     </section>`
   document.body.appendChild(root)
   return root
@@ -60,4 +60,33 @@ test('revert() mid-way restores the markup', () => {
   intro.revert()
   expect(title.innerHTML).toBe(before)
   expect(hidden(root)).toEqual([])
+})
+
+test('the header slides on GSAP alone: its CSS transform transition is off while the intro plays', () => {
+  const root = page()
+  const header = root.querySelector<HTMLElement>('.hdr')!
+  const intro = playIntro(root, { reduced: false })
+  expect(header.style.transition).toBe('none')
+  intro.cut()
+  expect(header.style.transition).toBe('')
+  intro.revert()
+})
+
+test('revert() mid-way gives the header its transition back', () => {
+  const root = page()
+  const header = root.querySelector<HTMLElement>('.hdr')!
+  const intro = playIntro(root, { reduced: false })
+  intro.revert()
+  expect(header.style.transition).toBe('')
+})
+
+test('the buttons pop in through their slots: the intro never writes the buttons themselves (Motion owns them)', () => {
+  const root = page()
+  const intro = playIntro(root, { reduced: false })
+  const slots = [...root.querySelectorAll<HTMLElement>('.btn-slot')]
+  expect(slots.every((s) => s.style.opacity === '0' || s.style.visibility === 'hidden')).toBe(true)
+  for (const b of root.querySelectorAll<HTMLElement>('.btn')) expect(b.getAttribute('style')).toBeNull()
+  intro.cut()
+  for (const b of root.querySelectorAll<HTMLElement>('.btn')) expect(b.getAttribute('style')).toBeNull()
+  intro.revert()
 })

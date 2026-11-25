@@ -12,7 +12,8 @@ export function Pain() {
       if (prefersReducedMotion()) return
       gsap.fromTo(
         '.pain__w',
-        { opacity: 0.15 },
+        // Unscrolled words stay readable (dim, not gone): 0.25 keeps them around 2:1 on the page.
+        { opacity: 0.25 },
         {
           opacity: 1,
           stagger: 0.06,

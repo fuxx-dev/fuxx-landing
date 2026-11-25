@@ -42,7 +42,8 @@
   transition: color 200ms, border-color 200ms, background-color 200ms;
 }
 .story__nav button:hover { color: var(--fg); }
-.story__nav button.is-active { color: var(--bg); border-color: var(--green); }
+/* The label goes dark once the sliding pill is under it, not before (dark text on dark otherwise). */
+.story__nav button.is-active { color: var(--bg); border-color: var(--green); transition-delay: 120ms; }
 /* The active pill: one element that slides between buttons (Motion layoutId). */
 .story__pill { position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: var(--green); }
 .story__nav-num { opacity: 0.7; margin-right: var(--space-1); }

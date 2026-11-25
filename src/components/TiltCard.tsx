@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef, type PointerEvent, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
 import { prefersReducedMotion, useReducedMotion } from '../lib/motion'
+import { rafThrottle } from '../lib/raf'
 import './tilt-card.css'
 
 const MAX_DEG = 4
@@ -22,6 +23,7 @@ export function TiltCard({
   reveal?: { delay: number }
 }) {
   const ref = useRef<HTMLElement>(null)
+  const glowRef = useRef<HTMLSpanElement>(null)
   const reduced = useReducedMotion()
   const rotateX = useSpring(0, SPRING)
   const rotateY = useSpring(0, SPRING)
@@ -36,19 +38,25 @@ export function TiltCard({
     y.set(24)
   }, [])
 
-  const onMove = (e: PointerEvent<HTMLElement>) => {
-    const el = ref.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    if (!r.width || !r.height) return
-    const px = e.clientX - r.left
-    const py = e.clientY - r.top
-    el.style.setProperty('--gx', `${Math.round(px)}px`)
-    el.style.setProperty('--gy', `${Math.round(py)}px`)
-    rotateY.set((px / r.width - 0.5) * 2 * MAX_DEG)
-    rotateX.set(-(py / r.height - 0.5) * 2 * MAX_DEG)
-  }
+  // Once a frame: measure the card, then move only the glow dot (its own transform) and the tilt.
+  const [follow] = useState(() =>
+    rafThrottle((x: number, y: number) => {
+      const el = ref.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      if (!r.width || !r.height) return
+      const px = x - r.left
+      const py = y - r.top
+      glowRef.current?.style.setProperty('--gx', `${Math.round(px)}px`)
+      glowRef.current?.style.setProperty('--gy', `${Math.round(py)}px`)
+      rotateY.set((px / r.width - 0.5) * 2 * MAX_DEG)
+      rotateX.set(-(py / r.height - 0.5) * 2 * MAX_DEG)
+    }),
+  )
+  useEffect(() => () => follow.cancel(), [follow])
+  const onMove = (e: PointerEvent<HTMLElement>) => follow(e.clientX, e.clientY)
   const onLeave = () => {
+    follow.cancel()
     rotateX.set(0)
     rotateY.set(0)
   }
@@ -75,7 +83,7 @@ export function TiltCard({
       onPointerLeave={onLeave}
     >
       <span className="tilt__glow" aria-hidden="true">
-        <span className="tilt__glow-dot" />
+        <span ref={glowRef} className="tilt__glow-dot" />
       </span>
       {children}
     </motion.article>

@@ -27,3 +27,33 @@ test('nothing beyond the reach, nothing on the centre', () => {
 test('reduced motion: always still', () => {
   expect(magnetOffset({ dx: 60, dy: 0 }, { ...opts, reduced: true })).toEqual({ x: 0, y: 0 })
 })
+
+import { renderHook } from '@testing-library/react'
+import { useRef } from 'react'
+import { useMagnet } from '../src/lib/magnet'
+
+test('measures the button once, not on every pointer move, and again after a scroll or resize', () => {
+  vi.useFakeTimers({ toFake: ['requestAnimationFrame', 'cancelAnimationFrame'] })
+  const el = document.createElement('a')
+  document.body.appendChild(el)
+  const rect = vi.fn(() => ({ left: 0, top: 0, width: 100, height: 40, right: 100, bottom: 40, x: 0, y: 0, toJSON() {} }))
+  el.getBoundingClientRect = rect
+  const { unmount } = renderHook(() => useMagnet(useRef<Element | null>(el), 6, true))
+  const move = (x: number) => window.dispatchEvent(new MouseEvent('pointermove', { clientX: x, clientY: 20 }))
+  for (let i = 0; i < 5; i++) move(60 + i)
+  vi.advanceTimersToNextFrame()
+  move(70)
+  vi.advanceTimersToNextFrame()
+  expect(rect).toHaveBeenCalledTimes(1)
+  window.dispatchEvent(new Event('scroll'))
+  move(71)
+  vi.advanceTimersToNextFrame()
+  expect(rect).toHaveBeenCalledTimes(2)
+  window.dispatchEvent(new Event('resize'))
+  move(72)
+  vi.advanceTimersToNextFrame()
+  expect(rect).toHaveBeenCalledTimes(3)
+  unmount()
+  el.remove()
+  vi.useRealTimers()
+})

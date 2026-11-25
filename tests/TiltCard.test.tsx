@@ -10,13 +10,18 @@ test('renders its children in an article', () => {
   expect(container.querySelector('article.card')).toBeTruthy()
 })
 
-test('follows the pointer with the glow', async () => {
+test('follows the pointer with the glow, once a frame, writing only the glow (not the whole card)', async () => {
+  vi.useFakeTimers({ toFake: ['requestAnimationFrame', 'cancelAnimationFrame'] })
   const { container } = render(<TiltCard>x</TiltCard>)
   const el = container.querySelector('article')!
+  const dot = container.querySelector<HTMLElement>('.tilt__glow-dot')!
   el.getBoundingClientRect = () => ({ left: 0, top: 0, width: 200, height: 100, right: 200, bottom: 100, x: 0, y: 0, toJSON() {} })
   await act(async () => { fireEvent.pointerMove(el, { clientX: 150, clientY: 25 }) })
-  expect(el.style.getPropertyValue('--gx')).toBe('150px')
-  expect(el.style.getPropertyValue('--gy')).toBe('25px')
+  await act(async () => { vi.advanceTimersToNextFrame() })
+  expect(dot.style.getPropertyValue('--gx')).toBe('150px')
+  expect(dot.style.getPropertyValue('--gy')).toBe('25px')
+  expect(el.style.getPropertyValue('--gx')).toBe('')
+  vi.useRealTimers()
 })
 
 test('reduced motion: no tilt, no transform, no glow tracking', async () => {

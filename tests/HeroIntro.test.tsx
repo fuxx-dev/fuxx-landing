@@ -38,3 +38,26 @@ test('if the safety timeout already showed the page, the intro does not play ove
   unmount()
   document.documentElement.className = ''
 })
+
+test('a scroll during the intro (a scrollbar drag, a restored position) lands it at once', () => {
+  const { container, unmount } = render(<Hero />)
+  const title = container.querySelector('.hero__title')!
+  expect(title.querySelectorAll('div').length).toBeGreaterThan(0)
+  fireEvent.scroll(window)
+  expect(title.querySelectorAll('div')).toHaveLength(0)
+  unmount()
+})
+
+test('the spotlight moves itself: its position goes on the spot, not the whole hero', async () => {
+  vi.useFakeTimers({ toFake: ['requestAnimationFrame', 'cancelAnimationFrame'] })
+  const { container, unmount } = render(<Hero />)
+  const section = container.querySelector<HTMLElement>('.hero')!
+  const spot = container.querySelector<HTMLElement>('.hero__spot')!
+  fireEvent.pointerMove(section, { clientX: 120, clientY: 80 })
+  vi.advanceTimersToNextFrame()
+  expect(spot.style.getPropertyValue('--sx')).toBe('120px')
+  expect(spot.style.getPropertyValue('--sy')).toBe('80px')
+  expect(section.style.getPropertyValue('--sx')).toBe('')
+  unmount()
+  vi.useRealTimers()
+})
