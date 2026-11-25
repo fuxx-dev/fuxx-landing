@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { DownloadButton } from '../components/DownloadButton'
 import { StarButton } from '../components/StarButton'
 import { canUseWebGL } from '../lib/webgl'
@@ -6,6 +6,7 @@ import { isNarrow, prefersReducedMotion, shouldRender } from '../lib/motion'
 import { loadHeroScene } from '../hero/load'
 import { HeroFallback } from './HeroFallback'
 import { gsap, useGSAP } from '../lib/gsap'
+import { playIntro } from '../lib/intro'
 import './hero.css'
 
 const COLORS = { green: '#00ff66', working: '#fab387', waiting: '#f38ba8', done: '#a6e3a1' }
@@ -29,6 +30,20 @@ export function Hero() {
     },
     { scope: sectionRef },
   )
+
+  // The first-load intro, on every load: set up before the first client paint, so the readable server
+  // HTML is what shows until JS runs. A scroll, swipe or key cuts it to its end.
+  useLayoutEffect(() => {
+    const intro = playIntro(document.body, { reduced: prefersReducedMotion() })
+    if (!intro.timeline) return
+    const cut = () => intro.cut()
+    const events = ['wheel', 'touchmove', 'keydown'] as const
+    events.forEach((e) => window.addEventListener(e, cut, { once: true, passive: true }))
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, cut))
+      intro.revert()
+    }
+  }, [])
 
   useEffect(() => {
     if (prefersReducedMotion() || !canUseWebGL()) return
@@ -111,15 +126,18 @@ export function Hero() {
   return (
     <section ref={sectionRef} className={`hero ${live ? 'hero--live' : ''}`} id="top" aria-labelledby="hero-title">
       <div className="hero__stage">
-        <HeroFallback />
-        <canvas ref={canvasRef} className="hero__canvas" aria-hidden="true" />
-        <span ref={labelRef} className="hero__ping" aria-hidden="true">
-          needs you
-        </span>
+        {/* The scroll hand-off moves the stage; the intro moves this, so the two never share a property. */}
+        <div className="hero__stage-in">
+          <HeroFallback />
+          <canvas ref={canvasRef} className="hero__canvas" aria-hidden="true" />
+          <span ref={labelRef} className="hero__ping" aria-hidden="true">
+            needs you
+          </span>
+        </div>
       </div>
       <div className="hero__copy wrap">
         <p className="hero__kicker">
-          <span className="hero__dot" /> a terminal for people who run AI coding agents
+          <span className="hero__dot" /> <span className="hero__kicker-text">a terminal for people who run AI coding agents</span>
         </p>
         <h1 id="hero-title" className="hero__title">
           Your not-so-friendly <br className="hero__br" />

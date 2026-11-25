@@ -2,6 +2,8 @@ import { render, screen, act } from '@testing-library/react'
 
 const loadScene = vi.fn()
 vi.mock('../src/hero/load', () => ({ loadHeroScene: () => loadScene() }))
+// The first-load intro is tested on its own (intro.test.ts, HeroIntro.test.tsx); these are about the scene.
+vi.mock('../src/lib/intro', () => ({ playIntro: () => ({ cut() {}, revert() {}, timeline: null }) }))
 const webgl = vi.hoisted(() => ({ ok: false }))
 vi.mock('../src/lib/webgl', () => ({ canUseWebGL: () => webgl.ok }))
 const motion = vi.hoisted(() => ({ reduced: false }))
