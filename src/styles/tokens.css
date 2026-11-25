@@ -26,5 +26,18 @@
   --step-2: clamp(1.4rem, 1.2rem + 1vw, 2rem);
   --step-3: clamp(1.9rem, 1.5rem + 2vw, 3.2rem);
   --step-4: clamp(2.4rem, 1.7rem + 3.6vw, 5rem);
+  /* Spacing: one 4px-based scale for gaps and padding, and three named rhythms built on it. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-head: clamp(32px, 2vw + 20px, 48px); /* a section's heading to its content */
+  --space-section: clamp(88px, 6vw + 64px, 152px); /* between sections */
+  --space-finale: clamp(120px, 10vw + 80px, 224px); /* before the closing call */
   color-scheme: dark;
 }

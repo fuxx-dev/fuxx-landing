@@ -16,6 +16,10 @@ body {
 a { color: inherit; }
 img, svg, canvas { display: block; max-width: 100%; }
 h1, h2, h3 { line-height: 1.1; margin: 0; font-weight: 700; letter-spacing: -0.02em; }
+/* Card and chapter titles break into even lines; body text never ends on a lone word. Section titles
+   (h1, h2) keep their written phrase breaks. */
+h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 p { margin: 0; }
 ::selection { background: var(--green); color: var(--bg); }
 :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
@@ -27,8 +31,14 @@ p { margin: 0; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-.kicker { font-size: var(--step--1); color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+.kicker { font-size: var(--step--1); color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-4); }
 .kicker::before { content: '// '; color: var(--faint); }
 .section-title { font-size: var(--step-3); max-width: 24ch; }
 /* SplitText line masks (the intro's headline, the section titles): room for descenders, no layout change. */
 .reveal-line-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }
+
+/* The first-load intro, before first paint. An inline head script (src/lib/intro-pending.ts) sets this
+   class when JS is on and motion is allowed, so what the intro brings in never paints whole and then
+   vanishes. The intro lifts it once its start state is set; a safety timeout lifts it if JS never runs.
+   No JS or reduced motion: the class never appears, and the page reads as served. */
+html.intro-pending :is(.hdr, .hero__kicker-text, .hero__title, .hero__lede, .hero__cta .btn, .hero__cta .dl__meta, .hero__stage-in) { opacity: 0; }

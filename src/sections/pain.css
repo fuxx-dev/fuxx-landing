@@ -1,8 +1,8 @@
-.pain { padding: clamp(80px, 16vh, 180px) 0 clamp(60px, 10vh, 120px); }
+.pain { padding: var(--space-section) 0 0; }
 .pain__line { font-size: var(--step-3); font-weight: 600; line-height: 1.2; max-width: 22ch; letter-spacing: -0.02em; }
 .pain__w { display: inline; }
-.pain__ask { margin-top: 28px; display: inline-flex; align-items: center; gap: 14px; font-size: var(--step-2); color: var(--waiting); font-weight: 700; }
-.pain__dot { position: relative; width: 12px; height: 12px; border-radius: 50%; background: var(--waiting); }
+.pain__ask { margin-top: var(--space-6); display: inline-flex; align-items: center; gap: var(--space-3); font-size: var(--step-2); color: var(--waiting); font-weight: 700; }
+.pain__dot { position: relative; flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--waiting); }
 .pain__dot::after { /* the ping ring: scale + opacity only, once the line has scrubbed in */
   content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--waiting); opacity: 0;
 }

@@ -1,15 +1,27 @@
 .btn {
-  display: inline-flex; align-items: center; gap: 0.55em;
-  padding: 0.8em 1.25em; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.55em;
+  padding: 0.8em 1.25em; border-radius: 8px; border: 1px solid transparent;
   font: 600 var(--step-0)/1 var(--mono); text-decoration: none; white-space: nowrap;
   transition: box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
 }
 .btn__icon { font-size: 1.1em; }
-.btn--primary { background: var(--green); color: #031208; box-shadow: 0 0 0 1px var(--green), 0 0 24px -6px var(--green-glow); }
-.btn--primary:hover { box-shadow: 0 0 0 1px var(--green), 0 0 36px -4px var(--green-glow); }
-.btn--ghost { color: var(--fg); border: 1px solid var(--line-strong); background: rgba(255, 255, 255, 0.015); }
+/* Every button carries a 1px border, so a primary and a ghost side by side are the same height. */
+.btn--primary { background: var(--green); border-color: var(--green); color: #031208; box-shadow: 0 0 24px -6px var(--green-glow); }
+.btn--primary:hover { box-shadow: 0 0 36px -4px var(--green-glow); }
+.btn--ghost { color: var(--fg); border-color: var(--line-strong); background: rgba(255, 255, 255, 0.015); }
 .btn--ghost:hover { border-color: var(--green); }
 .btn__count { box-sizing: border-box; text-align: right; font-variant-numeric: tabular-nums; padding-left: 0.6em; margin-left: 0.1em; border-left: 1px solid var(--line-strong); color: var(--dim); font-weight: 500; }
 .btn--compact, .dl--compact .btn { padding: 0.55em 0.9em; font-size: var(--step--1); }
-.dl { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0.6em; }
+.dl { display: inline-flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .dl__meta { font-size: var(--step--1); color: var(--dim); }
+
+/* A call-to-action row (the hero, the close): the two buttons side by side, the download's meta line
+   under the whole row, so it never pushes the second button away. Phones: the buttons stack, full width. */
+.cta { display: grid; grid-template-columns: repeat(2, max-content); gap: var(--space-3); align-items: center; }
+.cta .dl { display: contents; }
+.cta .dl__meta { grid-row: 2; grid-column: 1 / -1; }
+.cta--center { justify-content: center; text-align: center; }
+@media (max-width: 640px) {
+  .cta { grid-template-columns: minmax(0, 1fr); width: min(100%, 400px); }
+  .cta .dl__meta { grid-row: 3; }
+}

@@ -1,7 +1,7 @@
 .hero {
   position: relative; min-height: max(680px, 100svh);
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 0 clamp(48px, 9vh, 96px); overflow: hidden; isolation: isolate;
+  padding: 0 0 clamp(var(--space-7), 9vh, var(--space-9)); overflow: hidden; isolation: isolate;
 }
 .hero::after { /* floor fade into the page */
   content: ''; position: absolute; inset: auto 0 0; height: 30%; z-index: -1;
@@ -39,13 +39,15 @@
 }
 .hero--spot .hero__spot { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .hero__spot { display: none; } }
-.hero__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-.hero__kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--dim); font-size: var(--step--1); }
-.hero__dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--done); box-shadow: 0 0 10px var(--done); }
+.hero__copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+/* The dot sits on the kicker's first line, so a wrapped kicker (phones) keeps it in place. */
+.hero__kicker { display: inline-flex; align-items: flex-start; gap: var(--space-3); color: var(--dim); font-size: var(--step--1); }
+.hero__kicker-text { text-wrap: balance; }
+.hero__dot { flex: none; width: 8px; height: 8px; margin-top: calc((1lh - 8px) / 2); border-radius: 50%; background: var(--done); box-shadow: 0 0 10px var(--done); }
 .hero__title { font-size: clamp(2.3rem, 1.6rem + 3.2vw, 4.4rem); max-width: 13ch; }
 @media (min-width: 900px) { .hero__copy { max-width: var(--maxw); } .hero__title, .hero__lede { max-width: min(46vw, 640px); } }
 .hero__lede { color: var(--dim); font-size: var(--step-1); max-width: 52ch; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 8px; }
+.hero__cta { margin-top: var(--space-2); }
 @media (max-width: 640px) {
   .hero__br { display: none; }
   .hero__fallback { left: 50%; top: 19%; width: 52vw; }

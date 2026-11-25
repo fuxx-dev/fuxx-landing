@@ -7,6 +7,7 @@ import { loadHeroScene } from '../hero/load'
 import { HeroFallback } from './HeroFallback'
 import { gsap, useGSAP } from '../lib/gsap'
 import { playIntro } from '../lib/intro'
+import { introWasSkipped, releaseIntroPending } from '../lib/intro-pending'
 import './hero.css'
 
 const COLORS = { green: '#00ff66', working: '#fab387', waiting: '#f38ba8', done: '#a6e3a1' }
@@ -31,10 +32,13 @@ export function Hero() {
     { scope: sectionRef },
   )
 
-  // The first-load intro, on every load: set up before the first client paint, so the readable server
-  // HTML is what shows until JS runs. A scroll, swipe or key cuts it to its end.
+  // The first-load intro, on every load, set up before the first client paint. Until then the head
+  // script (lib/intro-pending) keeps its targets hidden; with the start state set, the page is shown.
+  // If that script's safety timeout already showed the page, the intro doesn't play over it.
+  // A scroll, swipe or key cuts it to its end.
   useLayoutEffect(() => {
-    const intro = playIntro(document.body, { reduced: prefersReducedMotion() })
+    const intro = playIntro(document.body, { reduced: prefersReducedMotion() || introWasSkipped() })
+    releaseIntroPending()
     if (!intro.timeline) return
     const cut = () => intro.cut()
     const events = ['wheel', 'touchmove', 'keydown'] as const
@@ -168,7 +172,7 @@ export function Hero() {
         <p className="hero__lede">
           A native, GPU-fast terminal for people who run AI coding agents and refuse to babysit them.
         </p>
-        <div className="hero__cta">
+        <div className="hero__cta cta">
           <DownloadButton showMeta magnetic />
           <StarButton magnetic />
         </div>

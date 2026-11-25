@@ -12,7 +12,7 @@ const NONE: Intro = { cut() {}, revert() {}, timeline: null }
 
 /**
  * The first-load intro (~1.8 s, on every load): the header slides down, the mark draws, the kicker
- * types, the headline rises char by char, the lede and buttons follow, the stage arrives, the dot
+ * types, the headline rises char by char, the lede, buttons and release line follow, the stage arrives, the dot
  * pings. Everything starts from the readable server HTML; the hiding happens here, on mount, inside
  * the timeline's `from`s. Reduced motion: nothing at all.
  */
@@ -27,6 +27,7 @@ export function playIntro(root: HTMLElement, { reduced }: { reduced: boolean }):
   const title = one('.hero__title')
   const lede = one('.hero__lede')
   const buttons = all('.hero__cta .btn')
+  const meta = one('.hero__cta .dl__meta')
   const stage = one('.hero__stage-in')
   const dot = one('.hero__dot')
 
@@ -40,7 +41,7 @@ export function playIntro(root: HTMLElement, { reduced }: { reduced: boolean }):
   if (kickerSplit) splits.push(kickerSplit)
   if (titleSplit) splits.push(titleSplit)
 
-  const plain = [header, stage, lede, dot, ...buttons].filter((el): el is HTMLElement => !!el)
+  const plain = [header, stage, lede, meta, dot, ...buttons].filter((el): el is HTMLElement => !!el)
   const tl = gsap.timeline({
     onComplete: () => {
       undoSplits()
@@ -54,6 +55,7 @@ export function playIntro(root: HTMLElement, { reduced }: { reduced: boolean }):
   if (titleSplit) tl.from(titleSplit.chars, { yPercent: 110, duration: 0.8, ease: 'expo.out', stagger: 0.018 }, 0.3)
   if (lede) tl.from(lede, { y: 16, autoAlpha: 0, duration: 0.6, ease: 'power2.out' }, 0.75)
   if (buttons.length) tl.from(buttons, { scale: 0.9, autoAlpha: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.08 }, 0.9)
+  if (meta) tl.from(meta, { autoAlpha: 0, duration: 0.5, ease: 'power2.out' }, 1.05)
   if (dot) tl.to(dot, { scale: 1.9, duration: 0.18, ease: 'power2.out', yoyo: true, repeat: 1 }, 1.45)
 
   return {

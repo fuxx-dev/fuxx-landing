@@ -1,25 +1,28 @@
-.story { position: relative; padding-top: clamp(40px, 8vh, 96px); }
-.story__intro { margin-bottom: clamp(32px, 6vh, 64px); }
+.story { position: relative; padding-top: var(--space-section); }
+.story__intro { margin-bottom: var(--space-head); }
 
 /* Stacked (phones, reduced motion, first paint): chapters one after another. */
-.story__chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(64px, 10vh, 120px); }
-.story__num { color: var(--green); font-size: var(--step--1); margin-bottom: 10px; }
-.story__title { font-size: var(--step-2); margin-bottom: 14px; }
-.story__icon { color: var(--green); margin-right: 0.4em; vertical-align: -0.08em; }
-.story__lede { color: var(--dim); max-width: 56ch; margin-bottom: 20px; }
-.story__caps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.story__chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(var(--space-8), 10vh, var(--space-9)); }
+.story__num { color: var(--green); font-size: var(--step--1); margin-bottom: var(--space-2); }
+.story__title { font-size: var(--step-2); margin-bottom: var(--space-3); }
+.story__icon { color: var(--green); margin-right: 0.4em; vertical-align: -0.035em; } /* cap-height centred, as .card__icon */
+.story__lede { color: var(--dim); max-width: 56ch; margin-bottom: var(--space-5); }
+/* Each row sits evenly between its dashed rules (no list gap, equal padding above and below). */
+.story__caps { list-style: none; margin: 0; padding: 0; display: grid; }
 .story__caps li {
-  display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between;
-  padding: 10px 0; border-top: 1px dashed var(--line); font-size: var(--step--1); color: var(--fg);
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: baseline; justify-content: space-between;
+  padding: var(--space-3) 0; border-top: 1px dashed var(--line); font-size: var(--step--1); color: var(--fg);
 }
-.story__caps li > span { flex: 1 1 28ch; }
-.story__inline { margin-top: 28px; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; background: var(--bg-raised); }
+/* The text takes the row; the key caps sit at its right edge at their own width (they are a span too). */
+.story__caps li > :not(.keys) { flex: 1 1 28ch; }
+.story__caps .keys { flex: none; }
+.story__inline { margin-top: var(--space-5); border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; background: var(--bg-raised); }
 .story__inline .story__shot:not(.is-active) { display: none; }
 .story__inline img { width: 100%; height: auto; }
 .story__inline .tt { min-height: 260px; }
 /* Stacked on a wide screen (reduced motion, short windows): text left, visual right, never blown up. */
 @media (min-width: 900px) {
-  .story__pin:not(.is-pinned) .story__chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); column-gap: 56px; align-items: start; }
+  .story__pin:not(.is-pinned) .story__chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); column-gap: var(--space-8); align-items: start; }
   .story__pin:not(.is-pinned) .story__chapter > :not(.story__inline) { grid-column: 1; }
   .story__pin:not(.is-pinned) .story__inline { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; max-width: 720px; }
 }
@@ -29,24 +32,25 @@
 .story__pin.is-pinned .story__grid {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(32px, 4vw, 72px); align-items: center;
 }
-.story__pin.is-pinned .story__left { display: grid; gap: 22px; align-self: stretch; align-content: center; }
-.story__nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.story__pin.is-pinned .story__left { display: grid; gap: var(--space-5); align-self: stretch; align-content: center; }
+/* The chapter tabs: an even two-column index, every pill the same width, labels on one left edge. */
+.story__nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
 .story__nav button {
   position: relative; isolation: isolate;
   font: 500 11.5px/1 var(--mono); color: var(--faint); background: none; cursor: pointer;
-  border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px;
+  border: 1px solid var(--line); border-radius: 999px; padding: 7px var(--space-3); text-align: left; white-space: nowrap;
   transition: color 200ms, border-color 200ms, background-color 200ms;
 }
 .story__nav button:hover { color: var(--fg); }
 .story__nav button.is-active { color: var(--bg); border-color: var(--green); }
 /* The active pill: one element that slides between buttons (Motion layoutId). */
 .story__pill { position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: var(--green); }
-.story__nav-num { opacity: 0.7; margin-right: 4px; }
+.story__nav-num { opacity: 0.7; margin-right: var(--space-1); }
 .story__pin.is-pinned .story__chapters { display: block; position: relative; height: calc(100vh - 230px); max-height: 640px; }
 .story__pin.is-pinned .story__chapter { position: absolute; inset: 0; pointer-events: none; }
 .story__pin.is-pinned .story__chapter.is-active { pointer-events: auto; }
-.story__pin.is-pinned .story__title { font-size: var(--step-2); margin-bottom: 10px; }
-.story__pin.is-pinned .story__lede { font-size: 0.92rem; line-height: 1.55; margin-bottom: 14px; }
+.story__pin.is-pinned .story__title { font-size: var(--step-2); margin-bottom: var(--space-2); }
+.story__pin.is-pinned .story__lede { font-size: 0.92rem; line-height: 1.55; margin-bottom: var(--space-4); }
 .story__pin.is-pinned .story__caps { gap: 0; }
 .story__pin.is-pinned .story__caps li { padding: 6px 0; font-size: 12.5px; line-height: 1.45; }
 .story__pin.is-pinned .keys { font-size: 12px; }

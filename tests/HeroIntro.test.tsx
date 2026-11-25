@@ -22,3 +22,19 @@ test('a key during the intro lands it at once: buttons usable, headline whole', 
   expect(screen.getByRole('link', { name: /Download for macOS/ })).toBeTruthy()
   expect(screen.getByRole('link', { name: /Star/ })).toBeTruthy()
 })
+
+test('mounting the hero lifts the head script’s intro-pending class', () => {
+  document.documentElement.className = 'intro-pending'
+  const { unmount } = render(<Hero />)
+  expect(document.documentElement.classList.contains('intro-pending')).toBe(false)
+  unmount()
+  document.documentElement.className = ''
+})
+
+test('if the safety timeout already showed the page, the intro does not play over it', () => {
+  document.documentElement.className = 'intro-skipped'
+  const { container, unmount } = render(<Hero />)
+  expect(container.querySelector('.hero__title')!.querySelectorAll('div')).toHaveLength(0)
+  unmount()
+  document.documentElement.className = ''
+})

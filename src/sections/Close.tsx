@@ -37,7 +37,7 @@ export function Close() {
         <LogoMark draw className="close__mark" />
         <h2 id="close-title" className="close__title">Stop babysitting.</h2>
         <p className="close__lede">Let the agents work. fuxx will tell you when one needs you.</p>
-        <div className="close__cta">
+        <div className="close__cta cta cta--center">
           <DownloadButton showMeta magnetic />
           <StarButton />
         </div>

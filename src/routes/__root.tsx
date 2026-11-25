@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Outlet, createRootRoute, HeadContent, Scripts } from '@tanstack/react-router'
 import css from '../styles/global.css?url'
+import { INTRO_PENDING_SCRIPT } from '../lib/intro-pending'
 
 const SITE = 'https://fuxx.fitzfitz.site'
 const TITLE = 'fuxx — Your not-so-friendly neighborhood CLI'
@@ -40,9 +41,11 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    // The head script adds a class to <html> before hydration (lib/intro-pending): expected, not a mismatch.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: INTRO_PENDING_SCRIPT }} />
       </head>
       <body>
         {children}

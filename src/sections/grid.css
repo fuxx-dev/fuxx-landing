@@ -1,13 +1,13 @@
-.grid { padding: clamp(80px, 14vh, 160px) 0 0; }
+.grid { padding: var(--space-section) 0 0; }
 .grid__cards { /* masonry: every card is exactly as tall as its content */
-  margin-top: clamp(28px, 5vh, 48px);
-  columns: 3 300px; column-gap: 14px;
+  margin-top: var(--space-head);
+  columns: 3 300px; column-gap: var(--space-4);
 }
 .card {
-  position: relative; display: flex; flex-direction: column; gap: 12px;
-  padding: 20px; border: 1px solid var(--line); border-radius: var(--radius);
+  position: relative; display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius);
   background: var(--bg-card);
-  break-inside: avoid; margin: 0 0 14px;
+  break-inside: avoid; margin: 0 0 var(--space-4);
 }
 .card::after { /* the neon edge on hover, animated by opacity only */
   content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
@@ -16,11 +16,12 @@
 }
 .card:hover::after { opacity: 1; }
 .card__title { font-size: var(--step-1); }
-.card__icon { color: var(--green); margin-right: 0.45em; vertical-align: -0.1em; }
-.card__caps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--step--1); color: var(--dim); }
-.card__caps li { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+/* Centred on the title's cap height: vertical-align = 0.365em (half of JetBrains Mono's cap) − half the icon. */
+.card__icon { color: var(--green); margin-right: 0.4em; vertical-align: -0.06em; }
+.card__caps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); font-size: var(--step--1); color: var(--dim); }
+.card__caps li { display: flex; flex-direction: column; gap: var(--space-2); align-items: flex-start; }
 .card__visual {
-  margin-top: 4px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #0a0e11;
+  margin-top: var(--space-1); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #0a0e11;
   transition: transform 260ms ease;
 }
 .card:hover .card__visual { transform: translateY(-4px); }
