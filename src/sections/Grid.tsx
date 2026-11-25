@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { grid, type Card } from '../content/grid'
 import { byId } from '../content/inventory'
 import { Keys } from '../components/Keys'
+import { PlanDemo } from '../components/PlanDemo'
 import { Shot } from '../components/Shot'
 import { TypedTerminal } from '../components/TypedTerminal'
 import { gsap, useGSAP } from '../lib/gsap'
@@ -60,6 +61,7 @@ function CardView({ card, reduced }: { card: Card; reduced: boolean }) {
           {'replay' in v ? <TypedTerminal script={v.replay} reduced={reduced} /> : null}
           {'demo' in v && v.demo === 'cursor' ? <CursorDemo /> : null}
           {'demo' in v && v.demo === 'sounds' ? <SoundsDemo /> : null}
+          {'demo' in v && v.demo === 'plan' ? <PlanDemo reduced={reduced} /> : null}
         </div>
       ) : null}
     </article>

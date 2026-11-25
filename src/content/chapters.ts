@@ -12,7 +12,7 @@ export const chapters: Chapter[] = [
     id: 'agents',
     title: 'Knows your agents',
     lede: 'Every terminal knows what its agent is up to. You hear the moment one needs a human, and its questions come as a card you can actually answer.',
-    capabilities: ['a-live-status', 'a-question-card', 'a-question-anywhere', 'a-question-agy', 'a-native-banners', 'a-unseen-dot', 'a-wait-jump'],
+    capabilities: ['a-live-status', 'a-question-card', 'a-question-anywhere', 'a-question-agy', 'a-native-banners', 'a-wait-jump'],
     visual: { shots: ['agent-waiting', 'question', 'question-agy'] },
   },
   {
@@ -33,14 +33,21 @@ export const chapters: Chapter[] = [
     id: 'agent-tabs',
     title: 'Agent tabs with an undo',
     lede: 'Claude Code and agy as a proper chat. Click a permission, rewind the prompt you regret, fork one to try it another way.',
-    capabilities: ['b-providers', 'b-chat', 'b-permissions', 'b-plan-card', 'b-plan-progress', 'b-rewind', 'b-fork', 'b-usage'],
+    capabilities: ['b-providers', 'b-chat', 'b-permissions', 'b-rewind', 'b-fork', 'b-usage'],
     visual: { shots: ['agent-chat', 'agent-permission', 'rewind', 'fork', 'usage'] },
+  },
+  {
+    id: 'plans',
+    title: 'Plan first, then build',
+    lede: 'Claude plans before it touches a file. Read the plan as a card, open the long ones, and approve it with one key, edits accepted from then on.',
+    capabilities: ['b-plan-card', 'b-plan-progress'],
+    visual: { shots: ['plan-waiting', 'plan-reading', 'plan-approved'] },
   },
   {
     id: 'workspaces',
     title: 'Workspaces, panes, tabs',
     lede: 'Split it how you like. Terminals, agents, files and web pages share one window, and it all comes back after a restart.',
-    capabilities: ['c-splits', 'c-tab-bars', 'c-new-tab', 'c-drag', 'c-sidebar', 'c-palette', 'c-undo', 'c-close-confirm', 'c-restore'],
+    capabilities: ['c-splits', 'c-tab-bars', 'c-new-tab', 'c-drag', 'c-sidebar', 'c-palette', 'c-restore'],
     visual: { shots: ['window-split', 'new-tab-menu', 'palette'] },
   },
   {

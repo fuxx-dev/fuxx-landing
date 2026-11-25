@@ -19,6 +19,33 @@
     "height": 249,
     "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"
   },
+  "plan-waiting": {
+    "width": 720,
+    "height": 596,
+    "alt": "Claude's plan as a card in the chat: its title, context, four steps and checks, with Approve · auto-accept edits, Approve · ask per edit and Keep planning…",
+    "focus": {
+      "x": 0.5,
+      "y": 0.7
+    }
+  },
+  "plan-reading": {
+    "width": 720,
+    "height": 628,
+    "alt": "A long plan opened whole, with outline chips for its parts and the three answers pinned over the box while you read",
+    "focus": {
+      "x": 0.5,
+      "y": 0.72
+    }
+  },
+  "plan-approved": {
+    "width": 720,
+    "height": 628,
+    "alt": "The approved plan folded to one line, Approved · auto-accept edits, the mode now Accept edits and the first edits running",
+    "focus": {
+      "x": 0.6,
+      "y": 0.3
+    }
+  },
   "agent-subagents": {
     "width": 720,
     "height": 419,

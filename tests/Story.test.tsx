@@ -10,6 +10,7 @@ const TITLES = [
   'Shows its work',
   'Subagents, out in the open',
   'Agent tabs with an undo',
+  'Plan first, then build',
   'Workspaces, panes, tabs',
   'Your repo, live',
   'Script it',
@@ -17,7 +18,7 @@ const TITLES = [
 
 afterEach(() => { setMatchMedia(() => false); vi.restoreAllMocks() })
 
-test('seven chapters, in order', () => {
+test('eight chapters, in order', () => {
   render(<Story />)
   const heads = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
   expect(heads).toEqual(TITLES)

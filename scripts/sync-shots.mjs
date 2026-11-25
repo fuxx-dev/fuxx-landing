@@ -53,7 +53,7 @@ for (const e of entries) {
   writeFileSync(paths.webp, webp)
   const info = await sharp(webp).metadata()
   // Display size: the manifest width, height kept in proportion.
-  meta[e.name] = { width: e.width, height: Math.round((info.height / info.width) * e.width), alt: e.alt }
+  meta[e.name] = { width: e.width, height: Math.round((info.height / info.width) * e.width), alt: e.alt, ...(e.focus ? { focus: e.focus } : {}) }
   const over = overBudget(avif.length) || overBudget(webp.length)
   if (over) failed = true
   rows.push(`${over ? '✗' : '✓'} ${e.name.padEnd(26)} avif ${(avif.length / 1024).toFixed(0).padStart(4)} KB · webp ${(webp.length / 1024).toFixed(0).padStart(4)} KB · ${outW}px`)

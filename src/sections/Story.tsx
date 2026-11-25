@@ -3,7 +3,7 @@ import { chapters, type Chapter } from '../content/chapters'
 import { byId } from '../content/inventory'
 import { FuxxWindow } from '../components/FuxxWindow'
 import { Keys } from '../components/Keys'
-import { Shot } from '../components/Shot'
+import { Shot, shotOrigin } from '../components/Shot'
 import { TypedTerminal } from '../components/TypedTerminal'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { useReducedMotion } from '../lib/motion'
@@ -150,7 +150,10 @@ function Visual({ chapter, index, reduced, paused = false }: { chapter: Chapter;
     <div className="story__shots">
       {shots.map((name, j) => (
         <div key={name} className={`story__shot ${j === index ? 'is-active' : ''}`}>
-          <Shot name={name} priority={chapter.id === 'agents' && j === 0} />
+          {/* The slow zoom leans in on the shot's focus point (the shot list's `focus`). */}
+          <div className="story__drift" style={{ transformOrigin: shotOrigin(name) }}>
+            <Shot name={name} priority={chapter.id === 'agents' && j === 0} />
+          </div>
         </div>
       ))}
     </div>

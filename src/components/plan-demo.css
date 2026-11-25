@@ -1,0 +1,94 @@
+/* fuxx's Plan card, played (PlanDemo): fuxx's Catppuccin Mocha, sizes held at 11px and up. */
+.plan-demo {
+  --pd-page: #1e1e2e; --pd-panel: #24273a; --pd-line: #363a4f; --pd-chip: #313244;
+  --pd-text: #cdd6f4; --pd-dim: #a6adc8; --pd-accent: #cba6f7; --pd-on-accent: #1e1e2e;
+  --pd-green: #a6e3a1; --pd-red: #f38ba8; --pd-peach: #fab387;
+  position: relative; height: 400px; overflow: hidden; padding: 14px 14px 0;
+  background: var(--pd-page); color: var(--pd-text); font: 12px/1.5 var(--sans, system-ui, sans-serif);
+  display: flex; flex-direction: column;
+}
+.pd-chat { flex: 1; display: flex; flex-direction: column; gap: 9px; min-height: 0; justify-content: flex-end; }
+/* Nothing in the chat squeezes: past the top it scrolls away, as fuxx's chat does. */
+.pd-chat > * { flex: none; }
+.pd-you {
+  align-self: flex-end; max-width: 82%; padding: 6px 11px; border-radius: 12px 12px 4px 12px;
+  background: var(--pd-chip); border: 1px solid var(--pd-line);
+}
+
+/* The card: an accent rim while it waits. */
+.pd-card {
+  border: 1.5px solid var(--pd-accent); border-radius: 10px; background: var(--pd-panel); overflow: hidden;
+  box-shadow: 0 0 0 0 rgba(203, 166, 247, 0.35); animation: pd-arrive 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both,
+    pd-glow 2.6s ease-in-out 600ms infinite;
+}
+.pd-head { display: flex; align-items: center; gap: 7px; padding: 9px 12px 2px; }
+.pd-icon { color: var(--pd-accent); }
+.pd-who { color: var(--pd-accent); font-weight: 600; }
+.pd-file { margin-left: auto; font-size: 11px; color: var(--pd-dim); background: var(--pd-chip); border-radius: 5px; padding: 1px 7px; }
+.pd-title { padding: 2px 12px 0; font-size: 13.5px; font-weight: 650; }
+.pd-body { position: relative; padding: 2px 12px 2px; max-height: 260px; overflow: hidden; transition: max-height 620ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.pd-body.is-folded { max-height: 86px; }
+.pd-body.is-folded::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 36px;
+  background: linear-gradient(rgba(36, 39, 58, 0), var(--pd-panel));
+}
+.pd-line { animation: pd-stream 360ms ease-out both; }
+.pd-line--h { margin-top: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--pd-dim); }
+.pd-line--li { padding-left: 16px; text-indent: -16px; }
+.pd-n { display: inline-block; width: 16px; text-indent: 0; color: var(--pd-dim); }
+.pd-line--code { display: inline-block; font-family: var(--mono, ui-monospace, monospace); font-size: 11.5px; background: var(--pd-chip); border-radius: 4px; padding: 0 6px; }
+.pd-more { padding: 3px 12px 0; font-size: 11.5px; font-weight: 600; color: var(--pd-accent); animation: pd-stream 300ms ease-out both; }
+.pd-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; padding: 9px 12px 10px; border-top: 1px solid var(--pd-line); font-size: 11.5px; }
+.pd-btn { border: 1px solid var(--pd-line); border-radius: 6px; padding: 3px 9px; transition: transform 160ms ease, filter 160ms ease; }
+.pd-btn--pri { background: var(--pd-accent); border-color: var(--pd-accent); color: var(--pd-on-accent); font-weight: 650; }
+.pd-btn--pri.is-pressed { transform: scale(0.94); filter: brightness(1.15); box-shadow: 0 0 0 6px rgba(203, 166, 247, 0.18); }
+.pd-quiet { color: var(--pd-dim); }
+
+/* Approved: one line, then the work. */
+.pd-folded {
+  display: flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid var(--pd-line);
+  border-radius: 8px; background: var(--pd-panel); animation: pd-fold 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pd-folded { flex-wrap: wrap; row-gap: 2px; }
+/* The title keeps its row; the step count and the answer go under it when the card is narrow. */
+.pd-folded__title { flex: 1 1 70%; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pd-dim { color: var(--pd-dim); font-size: 11px; white-space: nowrap; }
+.pd-ok { margin-left: auto; color: var(--pd-green); font-weight: 650; font-size: 11.5px; white-space: nowrap; animation: pd-stamp 520ms 200ms cubic-bezier(0.3, 1.6, 0.4, 1) both; }
+.pd-step {
+  display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--pd-line);
+  border-radius: 8px; background: var(--pd-panel); color: var(--pd-dim); animation: pd-stream 420ms 700ms ease-out both;
+}
+.pd-tile { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; color: var(--pd-peach); background: rgba(250, 179, 135, 0.16); }
+.pd-plus { color: var(--pd-green); }
+.pd-minus { color: var(--pd-red); }
+
+/* The box, its mode chip flipping when the plan is approved. */
+.pd-box {
+  display: flex; align-items: center; gap: 8px; margin: 10px 0 12px; padding: 9px 12px;
+  border: 1px solid var(--pd-line); border-radius: 12px; background: #181825;
+}
+.pd-placeholder { flex: 1; min-width: 0; color: var(--pd-dim); font-family: var(--mono, ui-monospace, monospace); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pd-mode { flex: none; padding: 1px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; color: var(--pd-accent); background: rgba(203, 166, 247, 0.14); transition: color 300ms, background-color 300ms; }
+.pd-mode.is-accept { color: var(--pd-green); background: rgba(166, 227, 161, 0.14); animation: pd-flip 520ms cubic-bezier(0.3, 1.5, 0.4, 1) both; }
+
+/* The pointer: glides to what it clicks next. */
+.pd-pointer {
+  position: absolute; left: 0; top: 0; width: 14px; height: 20px; margin: -2px 0 0 -2px; opacity: 0; pointer-events: none;
+  background: var(--pd-text); clip-path: polygon(0 0, 0 78%, 26% 60%, 44% 100%, 58% 94%, 42% 56%, 76% 56%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+  transition: transform 700ms cubic-bezier(0.45, 0, 0.2, 1), opacity 240ms ease, scale 160ms ease;
+}
+.pd-pointer.is-on { opacity: 1; }
+.plan-demo.is-pressing .pd-pointer.is-on { scale: 0.86; }
+
+@keyframes pd-arrive { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
+@keyframes pd-glow { 50% { box-shadow: 0 0 22px 0 rgba(203, 166, 247, 0.22); } }
+@keyframes pd-stream { from { opacity: 0; transform: translateY(5px); filter: blur(2px); } }
+@keyframes pd-fold { from { opacity: 0; transform: scaleY(1.6); transform-origin: top; } }
+@keyframes pd-stamp { from { opacity: 0; transform: scale(1.5); } }
+@keyframes pd-flip { from { transform: rotateX(90deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-demo *, .plan-demo { animation: none !important; transition: none !important; }
+  .pd-pointer { display: none; }
+}

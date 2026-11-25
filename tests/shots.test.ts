@@ -44,3 +44,12 @@ test('staleFiles lists outputs whose name left the manifest', () => {
   const existing = ['a.avif', 'a.webp', 'gone.avif', 'gone.webp', '.DS_Store']
   expect(staleFiles(existing, ['a'])).toEqual(['gone.avif', 'gone.webp'])
 })
+
+test('parseManifest keeps a focus point, as fractions of the shot', () => {
+  const focused = { ...entry, focus: { x: 0.5, y: 0.8 } }
+  expect(parseManifest([focused])).toEqual([focused])
+})
+
+test('parseManifest rejects a focus outside the shot', () => {
+  expect(() => parseManifest([{ ...entry, focus: { x: 1.2, y: 0.5 } }])).toThrow(/bad focus/)
+})

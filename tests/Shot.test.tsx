@@ -21,3 +21,8 @@ test('Shot with priority is not lazy', () => {
   const { container } = render(<Shot name="x" priority />)
   expect(container.querySelector('img')!.hasAttribute('loading')).toBe(false)
 })
+
+test('shotOrigin is the centre for a shot with no focus', async () => {
+  const { shotOrigin } = await import('../src/components/Shot')
+  expect(shotOrigin('no-such-shot')).toBe('50% 50%')
+})
