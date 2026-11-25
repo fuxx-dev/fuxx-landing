@@ -51,6 +51,7 @@
 .story__pin.is-pinned .story__caps li { padding: 6px 0; font-size: 12.5px; line-height: 1.45; }
 .story__pin.is-pinned .keys { font-size: 12px; }
 
+.story__pin.is-pinned .story__frame { will-change: transform; }
 .story__frame .fx-window__body { aspect-ratio: 16 / 10.5; background: #0a0e11; }
 .story__frame :is(.story__slides, .story__slide, .story__shots, .story__shot) { position: absolute; inset: 0; }
 .story__slide { opacity: 0; transition: opacity 360ms ease; }

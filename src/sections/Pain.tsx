@@ -12,7 +12,7 @@ export function Pain() {
       if (prefersReducedMotion()) return
       gsap.fromTo(
         '.pain__w',
-        { opacity: 0.42 },
+        { opacity: 0.15 },
         {
           opacity: 1,
           stagger: 0.06,

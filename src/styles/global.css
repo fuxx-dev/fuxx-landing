@@ -30,3 +30,5 @@ p { margin: 0; }
 .kicker { font-size: var(--step--1); color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
 .kicker::before { content: '// '; color: var(--faint); }
 .section-title { font-size: var(--step-3); max-width: 24ch; }
+/* SplitText line masks (the intro's headline, the section titles): room for descenders, no layout change. */
+.reveal-line-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }

@@ -1,12 +1,16 @@
+import { useRef } from 'react'
 import { DownloadButton } from '../components/DownloadButton'
 import { REPO_URL, StarButton } from '../components/StarButton'
 import { Icon } from '../components/Icon'
 import { LogoMark } from '../components/LogoMark'
+import { useRevealTitles } from '../lib/reveal'
 import './close.css'
 
 export function Close() {
+  const ref = useRef<HTMLElement>(null)
+  useRevealTitles(ref)
   return (
-      <section className="close wrap" aria-labelledby="close-title">
+      <section ref={ref} className="close wrap" aria-labelledby="close-title">
         <LogoMark className="close__mark" />
         <h2 id="close-title" className="close__title">Stop babysitting.</h2>
         <p className="close__lede">Let the agents work. fuxx will tell you when one needs you.</p>

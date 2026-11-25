@@ -9,6 +9,7 @@ import { Shot, shotOrigin } from '../components/Shot'
 import { TypedTerminal } from '../components/TypedTerminal'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { useReducedMotion } from '../lib/motion'
+import { useRevealTitles } from '../lib/reveal'
 import './story.css'
 
 /** The pinned layout shows one chapter at a time in a fixed box; it only works if the tallest one fits. */
@@ -66,6 +67,25 @@ export function Story() {
       return () => mm.revert()
     },
     { scope: sectionRef },
+  )
+
+  useRevealTitles(sectionRef)
+
+  // While pinned, the window drifts a little against the scroll (transform only, scrubbed).
+  useGSAP(
+    () => {
+      if (!pinned) return
+      gsap.fromTo(
+        '.story__frame',
+        { y: 24 },
+        {
+          y: -24,
+          ease: 'none',
+          scrollTrigger: { trigger: pinRef.current, start: 'top top', end: () => `+=${chapters.length * window.innerHeight}`, scrub: true },
+        },
+      )
+    },
+    { scope: sectionRef, dependencies: [pinned], revertOnUpdate: true },
   )
 
   // After the pinned layout renders, check every chapter fits its box; if one doesn't, go back to stacked.

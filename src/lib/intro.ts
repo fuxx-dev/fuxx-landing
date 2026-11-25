@@ -35,7 +35,7 @@ export function playIntro(root: HTMLElement, { reduced }: { reduced: boolean }):
   const kickerSplit = kicker ? SplitText.create(kicker, { type: 'chars' }) : null
   // Words break after hyphens too ("not-so-friendly"), so the split headline wraps exactly like the plain one.
   const titleSplit = title
-    ? SplitText.create(title, { type: 'chars,words,lines', mask: 'lines', linesClass: 'hero__line', wordDelimiter: { delimiter: /(?<=-)|(?= )/ } })
+    ? SplitText.create(title, { type: 'chars,words,lines', mask: 'lines', linesClass: 'reveal-line', wordDelimiter: { delimiter: /(?<=-)|(?= )/ } })
     : null
   if (kickerSplit) splits.push(kickerSplit)
   if (titleSplit) splits.push(titleSplit)

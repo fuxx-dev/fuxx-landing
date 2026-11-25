@@ -1,14 +1,18 @@
+import { useRef } from 'react'
 import { plugins } from '../content/plugins'
 import { byId } from '../content/inventory'
 import { PLUGIN_CAPABILITIES } from '../content/plugins'
 import { CopyButton } from '../components/CopyButton'
 import { FuxxWindow } from '../components/FuxxWindow'
 import { Icon } from '../components/Icon'
+import { useRevealTitles } from '../lib/reveal'
 import './plugins.css'
 
 export function Plugins() {
+  const ref = useRef<HTMLElement>(null)
+  useRevealTitles(ref)
   return (
-    <section id="plugins" className="plugins wrap" aria-labelledby="plugins-title">
+    <section ref={ref} id="plugins" className="plugins wrap" aria-labelledby="plugins-title">
       <p className="kicker">Plugins</p>
       <h2 id="plugins-title" className="section-title">Paste a GitHub link. That’s the install.</h2>
 

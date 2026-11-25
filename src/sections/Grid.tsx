@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { grid, type Card } from '../content/grid'
 import { byId } from '../content/inventory'
 import { Icon } from '../components/Icon'
@@ -7,12 +8,15 @@ import { Shot } from '../components/Shot'
 import { TiltCard } from '../components/TiltCard'
 import { TypedTerminal } from '../components/TypedTerminal'
 import { useReducedMotion } from '../lib/motion'
+import { useRevealTitles } from '../lib/reveal'
 import './grid.css'
 
 export function Grid() {
+  const ref = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
+  useRevealTitles(ref)
   return (
-    <section className="grid wrap" aria-labelledby="grid-title">
+    <section ref={ref} className="grid wrap" aria-labelledby="grid-title">
       <p className="kicker">And the rest</p>
       <h2 id="grid-title" className="section-title">Everything else it does, which is a lot.</h2>
       <div className="grid__cards">
