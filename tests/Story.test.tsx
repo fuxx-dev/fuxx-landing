@@ -66,3 +66,12 @@ test('pinned: the chapter nav has one active button, carrying the sliding pill',
   expect(pills).toHaveLength(1)
   expect(pills[0].closest('button')!.classList.contains('is-active')).toBe(true)
 })
+
+test('pinned: the window bar has one dot per shot of the active chapter, the current one lit', () => {
+  setMatchMedia((q) => q.includes('min-width') || q.includes('no-preference'))
+  const { container } = render(<Story />)
+  const first = chapters[0].visual
+  const n = 'shots' in first ? first.shots.length : 0
+  expect(container.querySelectorAll('.story__dots > span')).toHaveLength(n)
+  expect(container.querySelectorAll('.story__dots > span.is-on')).toHaveLength(1)
+})

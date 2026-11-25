@@ -70,6 +70,13 @@
 @keyframes story-drift { from { transform: scale(1); } to { transform: scale(1.06); } }
 .story__frame .story__shot picture, .story__frame .story__shot img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; }
 .story__frame .tt { position: absolute; inset: 0; }
+/* The shot dots in the window bar: lit by opacity and scale only. */
+.story__dots { display: flex; gap: 6px; }
+.story__dots > span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green); opacity: 0.22;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+.story__dots > span.is-on { opacity: 1; transform: scale(1.35); box-shadow: 0 0 8px var(--green-glow); }
 /* a scanline sweep on each swap */
 .story__slide.is-active::after {
   content: ''; position: absolute; left: 0; right: 0; height: 30%; top: -30%; pointer-events: none;

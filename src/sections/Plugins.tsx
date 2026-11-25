@@ -5,11 +5,15 @@ import { PLUGIN_CAPABILITIES } from '../content/plugins'
 import { CopyButton } from '../components/CopyButton'
 import { FuxxWindow } from '../components/FuxxWindow'
 import { Icon } from '../components/Icon'
+import { LinkTypeDemo } from '../components/LinkTypeDemo'
+import { TiltCard } from '../components/TiltCard'
+import { useReducedMotion } from '../lib/motion'
 import { useRevealTitles } from '../lib/reveal'
 import './plugins.css'
 
 export function Plugins() {
   const ref = useRef<HTMLElement>(null)
+  const reduced = useReducedMotion()
   useRevealTitles(ref)
   return (
     <section ref={ref} id="plugins" className="plugins wrap" aria-labelledby="plugins-title">
@@ -32,13 +36,13 @@ export function Plugins() {
           </ul>
         </div>
         <FuxxWindow title="Settings — Plugins" className="plugins__mock">
-          <SettingsMock />
+          <SettingsMock reduced={reduced} />
         </FuxxWindow>
       </div>
 
       <div className="plugins__cards">
         {plugins.samples.map((p) => (
-          <article key={p.repo} className="pcard">
+          <TiltCard key={p.repo} className="pcard">
             <p className="pcard__kind">{p.kind} · try it</p>
             <h3 className="pcard__name">{p.name}</h3>
             <p className="pcard__blurb">{p.blurb}</p>
@@ -46,9 +50,9 @@ export function Plugins() {
               <a href={`https://github.com/${p.repo}`}>{p.repo}</a>
               <CopyButton text={`https://github.com/${p.repo}`} label="Copy link" />
             </div>
-          </article>
+          </TiltCard>
         ))}
-        <article className="pcard">
+        <TiltCard className="pcard">
           <p className="pcard__kind">helper plugin · {plugins.completes.version} · try it</p>
           <h3 className="pcard__name">fuxx-completes</h3>
           <p className="pcard__blurb">{plugins.completes.blurb}</p>
@@ -60,7 +64,7 @@ export function Plugins() {
           <p className="pcard__also">
             Outside fuxx (zsh, bash): <code>{plugins.completes.brew}</code>
           </p>
-        </article>
+        </TiltCard>
       </div>
 
       <div className="plugins__own">
@@ -83,13 +87,10 @@ export function Plugins() {
   )
 }
 
-function SettingsMock() {
+function SettingsMock({ reduced }: { reduced: boolean }) {
   return (
     <div className="smock" aria-label="Settings, Plugins page with the two sample plugins installed" role="img">
-      <div className="smock__add">
-        <span className="smock__input">https://github.com/…</span>
-        <span className="smock__btn">Install</span>
-      </div>
+      <LinkTypeDemo url={`https://github.com/${plugins.samples[0].repo}`} reduced={reduced} />
       {[
         { name: 'Sunset Themes', v: '1.0.0', d: 'Warm themes from the design team.' },
         { name: 'Hello Helper', v: '1.0.0', d: 'A tiny test plugin: a fuxx-hello command and a FUXX_HELLO variable.' },

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { gsap, useGSAP } from '../lib/gsap'
+import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
 import { prefersReducedMotion } from '../lib/motion'
 import './pain.css'
 
@@ -20,6 +20,10 @@ export function Pain() {
           scrollTrigger: { trigger: ref.current, start: 'top 78%', end: 'bottom 55%', scrub: true },
         },
       )
+      // The line ends on the question, and the question's dot starts pinging.
+      const lit = () => ref.current?.classList.add('is-lit')
+      const unlit = () => ref.current?.classList.remove('is-lit')
+      ScrollTrigger.create({ trigger: ref.current, start: 'bottom 55%', onEnter: lit, onLeaveBack: unlit })
     },
     { scope: ref },
   )

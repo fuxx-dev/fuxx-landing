@@ -5,8 +5,9 @@
 .close__cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: flex-start; margin-top: 10px; }
 .close__cta .dl { align-items: center; }
 .close__steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 10px; text-align: left; max-width: 640px; font-size: var(--step--1); color: var(--dim); }
-.close__steps li { display: flex; gap: 14px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-card); }
-.close__steps span { color: var(--green); font-weight: 700; }
+.close__steps li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-card); }
+.close__step-n { color: var(--green); font-weight: 700; }
+.close__step-icon { color: var(--green); margin-top: 0.2em; opacity: 0.85; }
 .close__steps b { color: var(--fg); font-weight: 600; }
 .close__crumb { color: var(--faint); }
 .close__after { color: var(--faint); font-size: var(--step--1); }
@@ -14,5 +15,5 @@
 .foot__inner { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; padding: 28px 0; font-size: var(--step--1); color: var(--faint); }
 .foot__mark { color: var(--green); font-size: 1.1em; }
 .foot__links { margin-left: auto; display: flex; gap: 18px; }
-.foot__links a { color: var(--dim); text-decoration: none; }
+.foot__links a { display: inline-flex; align-items: center; gap: 6px; color: var(--dim); text-decoration: none; }
 .foot__links a:hover { color: var(--fg); }

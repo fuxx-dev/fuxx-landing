@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { getStarCount, starLabel } from '../lib/stars'
 import { countUp } from '../lib/count'
+import { useMagnet } from '../lib/magnet'
 import { prefersReducedMotion } from '../lib/motion'
 import { PRESS } from './DownloadButton'
 import { Icon } from './Icon'
@@ -10,7 +11,9 @@ import './buttons.css'
 export const REPO_URL = 'https://github.com/fitzfitz/fuxx-cli'
 const COUNT_MS = 900
 
-export function StarButton({ compact = false }: { compact?: boolean }) {
+export function StarButton({ compact = false, magnetic = false }: { compact?: boolean; magnetic?: boolean }) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const pull = useMagnet(ref, 6, magnetic)
   const [stars, setStars] = useState<number | null>(null)
   const [target, setTarget] = useState<number | null>(null)
   useEffect(() => {
@@ -39,6 +42,8 @@ export function StarButton({ compact = false }: { compact?: boolean }) {
   const width = starLabel(target)?.length ?? 0
   return (
     <motion.a
+      ref={ref}
+      style={magnetic ? pull : undefined}
       className={`btn btn--ghost ${compact ? 'btn--compact' : ''}`}
       href={REPO_URL}
       whileHover={PRESS.hover}

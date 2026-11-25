@@ -45,6 +45,26 @@ export function Hero() {
     }
   }, [])
 
+  // The spotlight follows the pointer while it is over the hero.
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || prefersReducedMotion()) return
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return
+      const r = section.getBoundingClientRect()
+      section.style.setProperty('--sx', `${Math.round(e.clientX - r.left)}px`)
+      section.style.setProperty('--sy', `${Math.round(e.clientY - r.top)}px`)
+      section.classList.add('hero--spot')
+    }
+    const onLeave = () => section.classList.remove('hero--spot')
+    section.addEventListener('pointermove', onMove, { passive: true })
+    section.addEventListener('pointerleave', onLeave)
+    return () => {
+      section.removeEventListener('pointermove', onMove)
+      section.removeEventListener('pointerleave', onLeave)
+    }
+  }, [])
+
   useEffect(() => {
     if (prefersReducedMotion() || !canUseWebGL()) return
     const section = sectionRef.current
@@ -125,6 +145,8 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className={`hero ${live ? 'hero--live' : ''}`} id="top" aria-labelledby="hero-title">
+      {/* A soft light that follows the pointer over the hero (moved by transform, see hero.css). */}
+      <span className="hero__spot" aria-hidden="true" />
       <div className="hero__stage">
         {/* The scroll hand-off moves the stage; the intro moves this, so the two never share a property. */}
         <div className="hero__stage-in">
@@ -147,8 +169,8 @@ export function Hero() {
           A native, GPU-fast terminal for people who run AI coding agents and refuse to babysit them.
         </p>
         <div className="hero__cta">
-          <DownloadButton showMeta />
-          <StarButton />
+          <DownloadButton showMeta magnetic />
+          <StarButton magnetic />
         </div>
       </div>
     </section>

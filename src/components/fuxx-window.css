@@ -14,5 +14,6 @@
 }
 .fx-window__dot { width: 10px; height: 10px; border-radius: 50%; background: #1c2621; }
 .fx-window__title { margin-left: 10px; font-size: 12px; color: var(--faint); }
+.fx-window__end { margin-left: auto; display: flex; align-items: center; }
 .fx-window__body { position: relative; }
 .fx-window__body img { width: 100%; height: auto; }

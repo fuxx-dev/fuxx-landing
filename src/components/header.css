@@ -1,22 +1,40 @@
 .hdr {
   position: fixed; inset: 0 0 auto; z-index: 50;
-  background: linear-gradient(to bottom, rgba(5, 7, 10, 0.92), rgba(5, 7, 10, 0.7));
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: saturate(140%) blur(6px);
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.hdr__inner { display: flex; align-items: center; gap: 24px; height: 60px; }
+/* The fill: faint at the top of the page, solid and blurred once you scroll (opacity only). */
+.hdr::before, .hdr::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; transition: opacity 320ms ease; }
+.hdr::before { background: linear-gradient(to bottom, rgba(5, 7, 10, 0.85), rgba(5, 7, 10, 0.4)); border-bottom: 1px solid transparent; }
+.hdr::after {
+  background: rgba(5, 7, 10, 0.82); border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); opacity: 0;
+}
+/* Compact: it tucks up 8px (transform), so it reads as less padding, and the blurred fill comes in. */
+.hdr--compact { transform: translateY(-8px); }
+.hdr--compact::before { opacity: 0; }
+.hdr--compact::after { opacity: 1; }
+.hdr__inner { display: flex; align-items: center; gap: 24px; height: 60px; transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.hdr--compact .hdr__inner { transform: translateY(4px); }
 .hdr__logo { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 700; text-decoration: none; font-size: var(--step-1); }
 .hdr__mark { color: var(--green); filter: drop-shadow(0 0 5px var(--green-glow)); }
-.hdr__nav { display: flex; gap: 20px; font-size: var(--step--1); }
-.hdr__nav a { color: var(--dim); text-decoration: none; }
-.hdr__nav a:hover { color: var(--fg); }
+.hdr__nav { display: flex; gap: 6px; font-size: var(--step--1); }
+.hdr__nav a {
+  position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 999px; color: var(--dim); text-decoration: none; transition: color 160ms ease;
+}
+.hdr__nav a:hover, .hdr__nav a:focus-visible { color: var(--fg); }
+/* The hover pill: one element that slides between the links (Motion layoutId). */
+.hdr__pill { position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line-strong); }
 .hdr__cta { margin-left: auto; display: flex; gap: 10px; align-items: center; }
 /* How far down the page: a 2px line on the header's bottom edge, scaled (transform only). */
 .scroll-progress {
   position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; transform-origin: 0 50%;
   background: var(--green); box-shadow: 0 0 10px var(--green-glow); pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .scroll-progress { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+  .hdr, .hdr__inner, .hdr::before, .hdr::after { transition: none; }
+}
 @media (max-width: 640px) {
   .hdr__nav { display: none; }
   .hdr__cta .btn--ghost { display: none; }

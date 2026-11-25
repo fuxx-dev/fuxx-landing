@@ -167,7 +167,7 @@ export function Story() {
           </div>
           {pinned ? (
             <div className="story__frame">
-              <FuxxWindow title={`fuxx — ${chapters[active].title.toLowerCase()}`}>
+              <FuxxWindow title={`fuxx — ${chapters[active].title.toLowerCase()}`} barEnd={<ShotDots chapter={chapters[active]} index={shot} />}>
                 <div className="story__slides">
                   {chapters.map((ch, i) => (
                     <div key={ch.id} className={`story__slide ${i === active ? 'is-active' : ''}`}>
@@ -181,6 +181,18 @@ export function Story() {
         </div>
       </div>
     </section>
+  )
+}
+
+/** One dot per shot of the chapter on screen, the current one lit (a replay has none). */
+function ShotDots({ chapter, index }: { chapter: Chapter; index: number }) {
+  if (!('shots' in chapter.visual)) return null
+  return (
+    <span className="story__dots">
+      {chapter.visual.shots.map((name, j) => (
+        <span key={name} className={j === index ? 'is-on' : ''} />
+      ))}
+    </span>
   )
 }
 
