@@ -8,7 +8,7 @@ export type Card = {
 /** Everything the story chapters don't cover (groups E, F, G, H, J, and the agent tab's details). */
 export const grid: Card[] = [
   { id: 'agent-box', title: 'The agent box', capabilities: ['b-agent-box', 'b-attach-commands', 'b-history', 'b-suggestions', 'b-file-pills', 'b-image-pills'], visual: { shot: 'suggestion' } },
-  { id: 'agent-extras', title: 'Agent tabs, the small stuff', capabilities: ['b-select-copy', 'b-top-bar', 'b-latest-prompt', 'b-take-back', 'b-drag-block'], visual: { shot: 'chat-select' } },
+  { id: 'agent-extras', title: 'Agent tabs, the small stuff', capabilities: ['b-select-copy', 'b-code-copy', 'b-paste', 'b-top-bar', 'b-latest-prompt', 'b-take-back', 'b-drag-block'], visual: { shot: 'chat-select' } },
   { id: 'menus', title: 'Right-click, everywhere', capabilities: ['c-context-menus', 'd-files-menu'], visual: { shot: 'files-menu' } },
   { id: 'browser', title: 'A browser in a pane', capabilities: ['f-browser-tabs', 'f-links', 'f-auto-open', 'f-agent-browser'], visual: { shot: 'browser' } },
   { id: 'diffs', title: 'Diffs worth reading', capabilities: ['e-diff-cards'], visual: { shot: 'diff-cards' } },
