@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { copyText } from '../lib/clipboard'
+import { Icon } from './Icon'
 
 const RESET_MS = 1800
 const MANUAL_MS = 6000
@@ -31,7 +32,17 @@ export function CopyButton({ text, label = 'Copy' }: { text: string; label?: str
         <input ref={input} className="copy__manual" readOnly value={text} aria-label="Press ⌘C to copy" onFocus={(e) => e.currentTarget.select()} />
       ) : null}
       <button type="button" className={`copy copy--${state}`} onClick={onClick} aria-live="polite">
-        {state === 'copied' ? 'Copied ✓' : state === 'manual' ? 'Press ⌘C' : label}
+        {state === 'copied' ? (
+          <>
+            <Icon name="check" size={13} /> Copied
+          </>
+        ) : state === 'manual' ? (
+          'Press ⌘C'
+        ) : (
+          <>
+            <Icon name="copy" size={13} /> {label}
+          </>
+        )}
       </button>
     </span>
   )

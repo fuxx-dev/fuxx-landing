@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { chapters, type Chapter } from '../content/chapters'
 import { byId } from '../content/inventory'
 import { FuxxWindow } from '../components/FuxxWindow'
+import { Icon } from '../components/Icon'
 import { Keys } from '../components/Keys'
 import { Shot, shotOrigin } from '../components/Shot'
 import { TypedTerminal } from '../components/TypedTerminal'
@@ -102,7 +103,10 @@ export function Story() {
               {chapters.map((ch, i) => (
                 <li key={ch.id} className={`story__chapter ${i === active ? 'is-active' : ''}`} aria-current={pinned && i === active ? 'step' : undefined}>
                   <p className="story__num">0{i + 1}</p>
-                  <h3 className="story__title">{ch.title}</h3>
+                  <h3 className="story__title">
+                    <Icon name={ch.icon} size="0.8em" className="story__icon" />
+                    {ch.title}
+                  </h3>
                   <p className="story__lede">{ch.lede}</p>
                   <ul className="story__caps">
                     {ch.capabilities.map((id) => {

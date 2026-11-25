@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { grid, type Card } from '../content/grid'
 import { byId } from '../content/inventory'
+import { Icon } from '../components/Icon'
 import { Keys } from '../components/Keys'
 import { PlanDemo } from '../components/PlanDemo'
 import { Shot } from '../components/Shot'
@@ -43,7 +44,10 @@ function CardView({ card, reduced }: { card: Card; reduced: boolean }) {
   const v = card.visual
   return (
     <article className={`card ${v ? 'card--visual' : ''}`}>
-      <h3 className="card__title">{card.title}</h3>
+      <h3 className="card__title">
+        <Icon name={card.icon} size="0.85em" className="card__icon" />
+        {card.title}
+      </h3>
       <ul className="card__caps">
         {card.capabilities.map((id) => {
           const c = byId.get(id)!

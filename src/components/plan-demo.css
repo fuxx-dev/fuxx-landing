@@ -23,6 +23,8 @@
 }
 .pd-head { display: flex; align-items: center; gap: 7px; padding: 9px 12px 2px; }
 .pd-icon { color: var(--pd-accent); }
+/* Lines that end on an icon keep it on their centre line. */
+.pd-file, .pd-more, .pd-btn, .pd-ok { display: inline-flex; align-items: center; gap: 4px; }
 .pd-who { color: var(--pd-accent); font-weight: 600; }
 .pd-file { margin-left: auto; font-size: 11px; color: var(--pd-dim); background: var(--pd-chip); border-radius: 5px; padding: 1px 7px; }
 .pd-title { padding: 2px 12px 0; font-size: 13.5px; font-weight: 650; }

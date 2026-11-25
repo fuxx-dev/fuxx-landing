@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Icon } from './Icon'
 import './plan-demo.css'
 
 /**
@@ -105,17 +106,21 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
         <div className="pd-you">Retries hit the old host after a failover. Plan the fix first.</div>
         {approved ? (
           <div className="pd-folded">
-            <span className="pd-icon">☰</span>
+            <Icon name="listChecks" size={14} className="pd-icon" />
             <span className="pd-folded__title">Retry against the current endpoint</span>
             <span className="pd-dim">4 steps</span>
-            <span className="pd-ok">Approved · auto-accept edits ✓</span>
+            <span className="pd-ok">
+              Approved · auto-accept edits <Icon name="check" size={12} />
+            </span>
           </div>
         ) : (
           <div className="pd-card">
             <div className="pd-head">
-              <span className="pd-icon">☰</span>
+              <Icon name="listChecks" size={14} className="pd-icon" />
               <span className="pd-who">Claude’s plan</span>
-              <span className="pd-file">retry-current-endpoint.md ↗</span>
+              <span className="pd-file">
+                retry-current-endpoint.md <Icon name="externalLink" size={11} />
+              </span>
             </div>
             <div className="pd-title">Retry against the current endpoint</div>
             <div className={`pd-body ${folded ? 'is-folded' : ''}`}>
@@ -128,12 +133,12 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
             </div>
             {folded ? (
               <div ref={moreRef} className="pd-more">
-                Show the whole plan ▾
+                Show the whole plan <Icon name="chevronDown" size={12} />
               </div>
             ) : null}
             <div className="pd-actions">
               <span ref={approveRef} className={`pd-btn pd-btn--pri ${name === 'pressing' ? 'is-pressed' : ''}`}>
-                Approve · auto-accept edits ⏎
+                Approve · auto-accept edits <Icon name="cornerDownLeft" size={12} />
               </span>
               <span className="pd-btn">Approve · ask per edit</span>
               <span className="pd-quiet">Keep planning…</span>
@@ -142,7 +147,9 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
         )}
         {approved ? (
           <div className="pd-step">
-            <span className="pd-tile">✎</span> Edit retry.rs <span className="pd-plus">+1</span> <span className="pd-minus">−1</span>
+            <span className="pd-tile">
+              <Icon name="pencil" size={12} />
+            </span> Edit retry.rs <span className="pd-plus">+1</span> <span className="pd-minus">−1</span>
           </div>
         ) : null}
       </div>

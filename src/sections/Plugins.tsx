@@ -3,6 +3,7 @@ import { byId } from '../content/inventory'
 import { PLUGIN_CAPABILITIES } from '../content/plugins'
 import { CopyButton } from '../components/CopyButton'
 import { FuxxWindow } from '../components/FuxxWindow'
+import { Icon } from '../components/Icon'
 import './plugins.css'
 
 export function Plugins() {
@@ -19,7 +20,10 @@ export function Plugins() {
           </p>
           <ul className="plugins__caps">
             {PLUGIN_CAPABILITIES.map((id) => (
-              <li key={id}>{byId.get(id)!.text}</li>
+              <li key={id}>
+                <Icon name="chevronRight" size={14} className="plugins__bullet" />
+                {byId.get(id)!.text}
+              </li>
             ))}
           </ul>
         </div>

@@ -16,6 +16,7 @@
 }
 .card:hover::after { opacity: 1; }
 .card__title { font-size: var(--step-1); }
+.card__icon { color: var(--green); margin-right: 0.45em; vertical-align: -0.1em; }
 .card__caps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--step--1); color: var(--dim); }
 .card__caps li { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
 .card__visual {

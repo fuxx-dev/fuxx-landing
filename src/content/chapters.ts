@@ -1,6 +1,10 @@
+import type { IconName } from '../components/Icon'
+
 export type Chapter = {
   id: string
   title: string
+  /** A small Lucide icon beside the title. */
+  icon: IconName
   lede: string
   capabilities: string[]
   /** Renders (shown in turn as the chapter scrolls; phones show the first), or a typed replay. */
@@ -10,6 +14,7 @@ export type Chapter = {
 export const chapters: Chapter[] = [
   {
     id: 'agents',
+    icon: 'bot',
     title: 'Knows your agents',
     lede: 'Every terminal knows what its agent is up to. You hear the moment one needs a human, and its questions come as a card you can actually answer.',
     capabilities: ['a-live-status', 'a-question-card', 'a-question-anywhere', 'a-question-agy', 'a-native-banners', 'a-wait-jump'],
@@ -17,6 +22,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'activity',
+    icon: 'activity',
     title: 'Shows its work',
     lede: 'No more scrolling a wall of tool calls. Every step shows which files it read, searched and changed, and whether its checks actually passed.',
     capabilities: ['k-tracks', 'k-rows', 'k-checks', 'k-planned', 'k-ledger'],
@@ -24,6 +30,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'subagents',
+    icon: 'network',
     title: 'Subagents, out in the open',
     lede: 'When the agent sends out helpers, each one gets a lane. Watch any of them live, and talk to the ones still running.',
     capabilities: ['b-subagents', 'l-rows', 'l-orchestrating', 'l-relay', 'l-closing'],
@@ -31,6 +38,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'agent-tabs',
+    icon: 'messagesSquare',
     title: 'Agent tabs with an undo',
     lede: 'Claude Code and agy as a proper chat. Click a permission, rewind the prompt you regret, fork one to try it another way.',
     capabilities: ['b-providers', 'b-chat', 'b-permissions', 'b-rewind', 'b-fork', 'b-usage'],
@@ -38,6 +46,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'plans',
+    icon: 'listChecks',
     title: 'Plan first, then build',
     lede: 'Claude plans before it touches a file. Read the plan as a card, open the long ones, and approve it with one key, edits accepted from then on.',
     capabilities: ['b-plan-card', 'b-plan-progress'],
@@ -45,6 +54,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'workspaces',
+    icon: 'layoutPanelLeft',
     title: 'Workspaces, panes, tabs',
     lede: 'Split it how you like. Terminals, agents, files and web pages share one window, and it all comes back after a restart.',
     capabilities: ['c-splits', 'c-tab-bars', 'c-new-tab', 'c-drag', 'c-sidebar', 'c-palette', 'c-restore'],
@@ -52,6 +62,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'repo',
+    icon: 'folderGit2',
     title: 'Your repo, live',
     lede: 'Watch the agent’s edits land as they happen, ask about the lines you don’t like, and commit without leaving the window.',
     capabilities: ['d-files', 'd-changes', 'd-commit', 'd-branches', 'd-graph', 'e-live-changes', 'e-ask'],
@@ -59,6 +70,7 @@ export const chapters: Chapter[] = [
   },
   {
     id: 'script',
+    icon: 'squareTerminal',
     title: 'Script it',
     lede: 'Inside any fuxx terminal, the fuxx command talks to the app. Your scripts can start agents and wait on them, and so can your agents.',
     capabilities: ['i-cli', 'i-mcp'],

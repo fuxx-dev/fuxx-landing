@@ -6,7 +6,7 @@
 }
 .hdr__inner { display: flex; align-items: center; gap: 24px; height: 60px; }
 .hdr__logo { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 700; text-decoration: none; font-size: var(--step-1); }
-.hdr__mark { color: var(--green); text-shadow: 0 0 10px var(--green-glow); }
+.hdr__mark { color: var(--green); filter: drop-shadow(0 0 5px var(--green-glow)); }
 .hdr__nav { display: flex; gap: 20px; font-size: var(--step--1); }
 .hdr__nav a { color: var(--dim); text-decoration: none; }
 .hdr__nav a:hover { color: var(--fg); }

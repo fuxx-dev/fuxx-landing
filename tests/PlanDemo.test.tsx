@@ -18,17 +18,17 @@ afterEach(() => vi.useRealTimers())
 
 test('reduced motion shows the approved card at once', () => {
   const { container } = render(<PlanDemo reduced />)
-  expect(container.textContent).toContain('Approved · auto-accept edits ✓')
+  expect(container.textContent).toContain('Approved · auto-accept edits')
   expect(container.textContent).toContain('Accept edits')
 })
 
 test('waits until in view, then plays the plan through to approved', async () => {
   const { container } = render(<PlanDemo />)
-  expect(container.textContent).not.toContain('Approved · auto-accept edits ✓')
+  expect(container.textContent).not.toContain('Approved · auto-accept edits')
   await act(async () => { fire?.() })
   const total = PLAN_STEPS.reduce((ms, s) => ms + s.ms, 0)
   await act(async () => { vi.advanceTimersByTime(total - PLAN_STEPS[PLAN_STEPS.length - 1].ms) })
-  expect(container.textContent).toContain('Approved · auto-accept edits ✓')
+  expect(container.textContent).toContain('Approved · auto-accept edits')
   expect(container.textContent).toContain('Accept edits')
 })
 
