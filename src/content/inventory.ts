@@ -1,4 +1,4 @@
-// Every user-facing capability of fuxx v0.13.9 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
+// Every user-facing capability of fuxx v0.13.10 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
 // and note 93's "Chores after M11ar").
 // The page may claim nothing beyond this list; tests/coverage.test.ts checks every entry is shown.
 export type Group = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L'
@@ -18,7 +18,7 @@ export const inventory: Capability[] = [
   // B. Agent tabs & chat
   { id: 'b-providers', group: 'B', text: 'Chat tabs for Claude Code and agy, starting in Auto; ⇧Tab changes the mode. Presets for claude, agy, opencode, codex and your own.', keys: '⇧Tab' },
   { id: 'b-chat', group: 'B', text: 'The conversation as a chat: streamed Markdown, tool rows that open in detail, a live todo list.' },
-  { id: 'b-permissions', group: 'B', text: 'Allow, Allow all edits or Deny right in the chat. Stop and Force stop when it goes sideways.' },
+  { id: 'b-permissions', group: 'B', text: 'Permission requests come as a short card: what Claude wants to do, the command folded when long, then Allow, Always allow or Deny. Stop and Force stop when it goes sideways.' },
   { id: 'b-top-bar', group: 'B', text: 'Cost per turn and a live context meter behind a clock in the box, a warning dot past 80%.' },
   { id: 'b-agent-box', group: 'B', text: 'Folder and branch chips, a model menu with effort levels, and the permission mode, all in the box you type in. The folder picker leads with each folder’s name, ⌘1–⌘8 for recent ones; the branch chip follows a git switch made anywhere.' },
   { id: 'b-attach-commands', group: 'B', text: '+ attaches files and images, / runs commands and skills, @ mentions files and subagents.' },
@@ -32,7 +32,7 @@ export const inventory: Capability[] = [
   { id: 'b-history', group: 'B', text: '↑ and ↓ in the box bring back what you sent: this tab’s prompts, then the folder’s.', keys: '↑ / ↓' },
   { id: 'b-latest-prompt', group: 'B', text: 'Your latest message floats over the chat while it’s scrolled away. Click it to jump back.' },
   { id: 'b-take-back', group: 'B', text: '× takes back a message Claude hasn’t read yet.' },
-  { id: 'b-plan-card', group: 'B', text: 'Plan Mode you can read: Claude’s plan arrives as a compact card, rendered and folded when long, its file one click away. Approve with edits accepted, approve asking per edit, or keep planning with a note. Scroll away and a slim pill keeps Approve over the box; once answered, the plan folds to one line.', keys: '⏎' },
+  { id: 'b-plan-card', group: 'B', text: 'Plan Mode you can read: Claude’s plan arrives as a compact card, rendered and folded when long, its file one click away. Approve with edits accepted, approve into Auto mode, approve asking per edit, or keep planning with a note. Scroll away and a slim pill keeps Approve over the box; once answered, the plan folds to one line.', keys: '⏎' },
   { id: 'b-plan-progress', group: 'B', text: 'A ☰ 4/6 tab follows the plan: each task done (with its commit), in progress, or next. It ticks a task off by the files its commits touched, so the messages needn’t say “Task 3”.' },
   { id: 'b-code-copy', group: 'B', text: 'Every code block in the chat has a copy button.' },
   { id: 'b-paste', group: 'B', text: '⌘V never stays silent: files copied in Finder paste as pills, TIFF and BMP become PNG, and what fuxx can’t take, it says.', keys: '⌘V' },

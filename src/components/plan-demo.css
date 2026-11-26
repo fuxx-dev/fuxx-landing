@@ -3,7 +3,7 @@
   --pd-page: #1e1e2e; --pd-panel: #24273a; --pd-line: #363a4f; --pd-chip: #313244;
   --pd-text: #cdd6f4; --pd-dim: #a6adc8; --pd-accent: #cba6f7; --pd-on-accent: #1e1e2e;
   --pd-green: #a6e3a1; --pd-red: #f38ba8; --pd-peach: #fab387;
-  position: relative; height: 400px; overflow: hidden; padding: 14px 14px 0;
+  position: relative; height: 432px; overflow: hidden; padding: 14px 14px 0;
   background: var(--pd-page); color: var(--pd-text); font: 12px/1.5 var(--sans, system-ui, sans-serif);
   display: flex; flex-direction: column;
 }

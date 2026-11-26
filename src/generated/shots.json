@@ -16,13 +16,13 @@
   },
   "agent-permission": {
     "width": 640,
-    "height": 249,
-    "alt": "Claude asks to run Write; buttons for Allow, Allow all edits this session, and Deny"
+    "height": 225,
+    "alt": "Claude asks to run a commit: its own words “Create the commit and show it” as the title with a Bash tag, the command once and folded with Show all, then Allow, Always allow git commit * and Deny"
   },
   "plan-waiting": {
     "width": 720,
     "height": 561,
-    "alt": "Claude’s plan as a card in the chat: one header line with its file and “4 steps”, context, steps and checks, then one row of answers: Approve · auto-accept, Approve, Keep planning",
+    "alt": "Claude’s plan as a card in the chat: one header line with its file and “4 steps”, context, steps and checks, then one row of answers: Approve · auto-accept, Approve · Auto mode, Approve, Keep planning",
     "focus": {
       "x": 0.5,
       "y": 0.6
@@ -39,7 +39,7 @@
   },
   "plan-approved": {
     "width": 720,
-    "height": 238,
+    "height": 351,
     "alt": "The approved plan folded to one line, “Plan approved · auto-accept edits ✓” with Show plan, and Claude starting on the work"
   },
   "agent-subagents": {

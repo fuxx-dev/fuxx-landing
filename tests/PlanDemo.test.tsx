@@ -23,7 +23,7 @@ test('reduced motion shows the approved card at once, folded to one line', () =>
   expect(container.textContent).toContain('Accept edits')
 })
 
-test('the waiting card has fuxx 0.13.9’s one header line and one row of answers', async () => {
+test('the waiting card has fuxx 0.13.10’s one header line and one row of answers, Auto mode second', async () => {
   const { container } = render(<PlanDemo />)
   await act(async () => { fire?.() })
   await act(async () => { vi.advanceTimersByTime(PLAN_STEPS[0].ms) })
@@ -33,7 +33,7 @@ test('the waiting card has fuxx 0.13.9’s one header line and one row of answer
   expect(head).toContain('4 steps')
   expect(container.querySelector('.pd-title')).toBeNull()
   expect(container.querySelector('.pd-more')!.textContent).toContain('Show all')
-  expect([...container.querySelectorAll('.pd-actions > *')].map((b) => b.textContent!.trim())).toEqual(['Approve · auto-accept', 'Approve', 'Keep planning'])
+  expect([...container.querySelectorAll('.pd-actions > *')].map((b) => b.textContent!.trim())).toEqual(['Approve · auto-accept', 'Approve · Auto mode', 'Approve', 'Keep planning'])
 })
 
 test('waits until in view, then plays the plan through to approved', async () => {

@@ -149,6 +149,7 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
                 <span ref={approveRef} className={`pd-btn pd-btn--pri ${name === 'pressing' ? 'is-pressed' : ''}`}>
                   Approve · auto-accept <Icon name="cornerDownLeft" size={12} />
                 </span>
+                <span className="pd-btn">Approve · Auto mode</span>
                 <span className="pd-btn">Approve</span>
                 <span className="pd-quiet">Keep planning</span>
               </div>
