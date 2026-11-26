@@ -26,3 +26,12 @@ then "both" (real renders and a live demo), then "go ahead".
 - A shot taller than the frame fits whole (`.story__drift picture { display: contents }`).
 - The approved scene's turn numbers its calls after the planning turn's (a shared id had finished the
   wrong call).
+
+## Since fuxx 0.13.9 (2026-11-26)
+
+fuxx's chore 23 made the card tighter, so the renders and the demo follow it: one header line
+(`Claude's plan · retry-current-endpoint.md ↗ · 4 steps`, no separate title), "Show all", the answers in
+one row (Approve · auto-accept ⏎, Approve, Keep planning), a slim "Plan waiting" pill over the box instead
+of the pinned answers, and an answered plan folded to "Plan approved · auto-accept edits ✓ … Show plan ›".
+The `plan-approved` image now comes from `agent-plan-long-command` (cropped to the folded line):
+`agent-plan-approved` ends with the plan opened again.

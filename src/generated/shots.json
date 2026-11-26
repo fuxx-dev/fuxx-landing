@@ -21,17 +21,17 @@
   },
   "plan-waiting": {
     "width": 720,
-    "height": 596,
-    "alt": "Claude's plan as a card in the chat: its title, context, four steps and checks, with Approve · auto-accept edits, Approve · ask per edit and Keep planning…",
+    "height": 561,
+    "alt": "Claude’s plan as a card in the chat: one header line with its file and “4 steps”, context, steps and checks, then one row of answers: Approve · auto-accept, Approve, Keep planning",
     "focus": {
       "x": 0.5,
-      "y": 0.7
+      "y": 0.6
     }
   },
   "plan-reading": {
     "width": 720,
     "height": 628,
-    "alt": "A long plan opened whole, with outline chips for its parts and the three answers pinned over the box while you read",
+    "alt": "A long plan opened whole, with outline chips for its parts; its answers scrolled away, a slim “Plan waiting · Approve · Keep planning” pill sits over the box",
     "focus": {
       "x": 0.5,
       "y": 0.72
@@ -39,17 +39,13 @@
   },
   "plan-approved": {
     "width": 720,
-    "height": 628,
-    "alt": "The approved plan folded to one line, Approved · auto-accept edits, the mode now Accept edits and the first edits running",
-    "focus": {
-      "x": 0.6,
-      "y": 0.3
-    }
+    "height": 238,
+    "alt": "The approved plan folded to one line, “Plan approved · auto-accept edits ✓” with Show plan, and Claude starting on the work"
   },
   "agent-subagents": {
     "width": 720,
-    "height": 419,
-    "alt": "Subagent pills above the chat: Main, Lint the code, Watch the tests, Check the build; one subagent's conversation is open"
+    "height": 520,
+    "alt": "The subagents tab in the agent box’s corner, 0/14, opened: every running subagent with what it’s doing and its time, a click away; the main chat behind lists each one with a robot"
   },
   "usage": {
     "width": 640,
@@ -133,7 +129,7 @@
   },
   "tracks": {
     "width": 720,
-    "height": 279,
+    "height": 298,
     "alt": "A busy agent step drawn as file tracks: a row per file with a bead per call, a Checks track, and summaries like “edited · +2 −1” and “tests failed · cli:: 1 of 3”"
   },
   "steps": {
@@ -143,18 +139,23 @@
   },
   "ledger": {
     "width": 720,
-    "height": 472,
-    "alt": "The turn ledger opened from the agent box’s tab: four changed files with their line counts, and each check’s runs, failed then passed"
+    "height": 470,
+    "alt": "The status row’s “4 changed” chip opened: the four changed files under src with their line counts, the checks chip beside it"
+  },
+  "shells": {
+    "width": 720,
+    "height": 420,
+    "alt": "Claude’s background shells, opened from their 1/3 corner tab beside the plan’s 4/6: two running with their time, command, last output line and a stop button, one finished"
   },
   "lanes-row": {
     "width": 720,
-    "height": 198,
-    "alt": "Main and Explore pills above the chat; in the main chat the Explore subagent’s row wears a robot and reads “Running Read · 0:12”"
+    "height": 175,
+    "alt": "In the main chat the Explore subagent’s row wears a robot and reads “Running Read · 0:12”"
   },
   "lanes-relay": {
     "width": 720,
-    "height": 553,
-    "alt": "Messaging the running Explore subagent from its lane: one message delivered, one Main didn’t pass on with Send again, one waiting for Main’s next step"
+    "height": 581,
+    "alt": "Inside the running Explore subagent, a slim “← Main › Explore” row on top: one message delivered, one Main didn’t pass on with Send again, one waiting for Main’s next step"
   },
   "lanes-closing": {
     "width": 720,

@@ -1,7 +1,7 @@
 import {
   Activity, Archive, ArrowRight, BookOpen, Bell, Bot, Check, ChevronDown, ChevronRight, ClipboardCopy, Copy,
   CornerDownLeft, Download, ExternalLink, FileCode, FileDiff, FolderGit2, Globe, Hand, Keyboard, Layers,
-  LayoutGrid, LayoutPanelLeft, ListChecks, MessageSquareText, MessagesSquare, MousePointerClick, Network, Palette,
+  LayoutGrid, LayoutPanelLeft, ListChecks, Menu, MessageSquareText, MessagesSquare, MousePointerClick, Network, Palette,
   Pencil, Puzzle, RefreshCw, Rows3, Server, Settings, ShieldCheck, SquareTerminal, Star, Tag, Terminal, TextCursor,
   Undo2,
 } from 'lucide-react'
@@ -32,6 +32,7 @@ export const ICONS = {
   layoutGrid: LayoutGrid,
   layoutPanelLeft: LayoutPanelLeft,
   listChecks: ListChecks,
+  menu: Menu,
   messageSquareText: MessageSquareText,
   messagesSquare: MessagesSquare,
   mousePointerClick: MousePointerClick,

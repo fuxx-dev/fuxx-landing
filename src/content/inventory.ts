@@ -1,4 +1,4 @@
-// Every user-facing capability of fuxx v0.13.7 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
+// Every user-facing capability of fuxx v0.13.9 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
 // and note 93's "Chores after M11ar").
 // The page may claim nothing beyond this list; tests/coverage.test.ts checks every entry is shown.
 export type Group = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L'
@@ -32,8 +32,8 @@ export const inventory: Capability[] = [
   { id: 'b-history', group: 'B', text: '↑ and ↓ in the box bring back what you sent: this tab’s prompts, then the folder’s.', keys: '↑ / ↓' },
   { id: 'b-latest-prompt', group: 'B', text: 'Your latest message floats over the chat while it’s scrolled away. Click it to jump back.' },
   { id: 'b-take-back', group: 'B', text: '× takes back a message Claude hasn’t read yet.' },
-  { id: 'b-plan-card', group: 'B', text: 'Plan Mode you can read: Claude’s plan arrives as a card, rendered and folded when long, its file one click away. Approve with edits accepted, approve asking per edit, or keep planning with a note.', keys: '⏎' },
-  { id: 'b-plan-progress', group: 'B', text: 'A ☰ 4/6 tab follows the plan: each task done (with its commit), in progress, or next.' },
+  { id: 'b-plan-card', group: 'B', text: 'Plan Mode you can read: Claude’s plan arrives as a compact card, rendered and folded when long, its file one click away. Approve with edits accepted, approve asking per edit, or keep planning with a note. Scroll away and a slim pill keeps Approve over the box; once answered, the plan folds to one line.', keys: '⏎' },
+  { id: 'b-plan-progress', group: 'B', text: 'A ☰ 4/6 tab follows the plan: each task done (with its commit), in progress, or next. It ticks a task off by the files its commits touched, so the messages needn’t say “Task 3”.' },
   { id: 'b-code-copy', group: 'B', text: 'Every code block in the chat has a copy button.' },
   { id: 'b-paste', group: 'B', text: '⌘V never stays silent: files copied in Finder paste as pills, TIFF and BMP become PNG, and what fuxx can’t take, it says.', keys: '⌘V' },
   { id: 'b-usage', group: 'B', text: 'Live usage in the status bar: % used and when it resets, every limit in a popover.' },
@@ -84,12 +84,13 @@ export const inventory: Capability[] = [
   { id: 'k-rows', group: 'K', text: 'Smaller steps read as plain rows: the agent’s own words, the command as a dim trace, and chips like “2 passed” or “build failed · E0425”.' },
   { id: 'k-checks', group: 'K', text: 'Honest checks: cargo, pytest, jest, vitest and go test are read from their output, so a failing cargo test | tail is never green.' },
   { id: 'k-planned', group: 'K', text: 'A failure the agent planned (“red first”) says “red, as planned”. A real one stays under its step until the same check passes.' },
-  { id: 'k-ledger', group: 'K', text: 'The turn so far, over the box: “Cultivating… · Running tests 0:14”, and “4 changed · checks 2/6” under it. Click it for the changed files under their folders, with A/M/D and +/−, and any file’s diff.' },
+  { id: 'k-ledger', group: 'K', text: 'The turn so far, in one row over the box: “Cultivating… · Running tests 0:14”, with “4 changed” and the checks as chips on its right. Click a chip for the changed files under their folders, with A/M/D and +/− and any file’s diff, or for the checks.' },
+  { id: 'k-shells', group: 'K', text: 'Claude’s background shells (a dev server, a long build) get a 1/3 tab beside the plan’s: each shell’s status, running time and last output line, with a stop button. Click one to follow its output.' },
   // L. Subagents
-  { id: 'b-subagents', group: 'L', text: 'Every subagent gets a pill above the chat. Click one and the chat becomes that subagent’s live conversation.', keys: '⌥⌘[ / ⌥⌘]' },
+  { id: 'b-subagents', group: 'L', text: 'Subagents get a robot 1/2 tab in the box’s corner: the ones that need you first, then running, then done. Click one and the chat becomes that subagent’s live conversation; ←\u00a0Main takes you back.', keys: '⌥⌘[ / ⌥⌘]' },
   { id: 'l-rows', group: 'L', text: 'In the main chat a subagent’s row wears a robot and says what it’s doing: “Running Read · 0:12”, “Needs input”, “14 steps · 2:10”.' },
   { id: 'l-orchestrating', group: 'L', text: 'The tab reads “Orchestrating…” while only subagents are working.' },
-  { id: 'l-relay', group: 'L', text: 'Message a Claude subagent running in the background, right from its lane. Main passes your words on, and the lane tells you when they’re delivered.' },
+  { id: 'l-relay', group: 'L', text: 'Message a Claude subagent running in the background, right from its view. Main passes your words on, and the view tells you when they’re delivered.' },
   { id: 'l-closing', group: 'L', text: 'A finished subagent can’t be messaged by mistake: its box becomes Back to Main, or Ask Main about it.' },
   // I. Scripting
   { id: 'i-cli', group: 'I', text: 'The fuxx command: ls, new, wait, question, answer, events, note, progress. Agent tabs are a1, a2…' },

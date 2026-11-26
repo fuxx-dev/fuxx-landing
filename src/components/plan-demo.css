@@ -21,13 +21,14 @@
   box-shadow: 0 0 0 0 rgba(203, 166, 247, 0.35); animation: pd-arrive 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both,
     pd-glow 2.6s ease-in-out 600ms infinite;
 }
-.pd-head { display: flex; align-items: center; gap: 7px; padding: 9px 12px 2px; }
+/* One header line (fuxx 0.13.9): ☰ Claude's plan · the file ↗ · its steps. */
+.pd-head { display: flex; align-items: center; gap: 6px; padding: 8px 12px 2px; font-size: 11.5px; white-space: nowrap; }
 .pd-icon { color: var(--pd-accent); }
 /* Lines that end on an icon keep it on their centre line. */
 .pd-file, .pd-more, .pd-btn, .pd-ok { display: inline-flex; align-items: center; gap: 4px; }
 .pd-who { color: var(--pd-accent); font-weight: 600; }
-.pd-file { margin-left: auto; font-size: 11px; color: var(--pd-dim); background: var(--pd-chip); border-radius: 5px; padding: 1px 7px; }
-.pd-title { padding: 2px 12px 0; font-size: 13.5px; font-weight: 650; }
+.pd-file { min-width: 0; color: var(--pd-dim); }
+.pd-file__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .pd-body { position: relative; padding: 2px 12px 2px; max-height: 260px; overflow: hidden; transition: max-height 620ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 .pd-body.is-folded { max-height: 86px; }
 .pd-body.is-folded::after {
@@ -52,10 +53,9 @@
   border-radius: 8px; background: var(--pd-panel); animation: pd-fold 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .pd-folded { flex-wrap: wrap; row-gap: 2px; }
-/* The title keeps its row; the step count and the answer go under it when the card is narrow. */
-.pd-folded__title { flex: 1 1 70%; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pd-dim { color: var(--pd-dim); font-size: 11px; white-space: nowrap; }
-.pd-ok { margin-left: auto; color: var(--pd-green); font-weight: 650; font-size: 11.5px; white-space: nowrap; animation: pd-stamp 520ms 200ms cubic-bezier(0.3, 1.6, 0.4, 1) both; }
+.pd-show { margin-left: auto; display: inline-flex; align-items: center; gap: 2px; }
+.pd-ok { color: var(--pd-green); font-weight: 650; font-size: 11.5px; white-space: nowrap; animation: pd-stamp 520ms 200ms cubic-bezier(0.3, 1.6, 0.4, 1) both; }
 .pd-step {
   display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--pd-line);
   border-radius: 8px; background: var(--pd-panel); color: var(--pd-dim); animation: pd-stream 420ms 700ms ease-out both;

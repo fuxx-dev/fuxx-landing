@@ -111,23 +111,27 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
         <AnimatePresence mode="popLayout" initial={false}>
           {approved ? (
             <motion.div key="folded" className="pd-folded" exit={LEAVE}>
-              <Icon name="listChecks" size={14} className="pd-icon" />
-              <span className="pd-folded__title">Retry against the current endpoint</span>
-              <span className="pd-dim">4 steps</span>
+              <Icon name="menu" size={13} className="pd-icon" />
               <span className="pd-ok">
-                Approved · auto-accept edits <Icon name="check" size={12} />
+                Plan approved · auto-accept edits <Icon name="check" size={12} />
+              </span>
+              <span className="pd-dim pd-show">
+                Show plan <Icon name="chevronRight" size={12} />
               </span>
             </motion.div>
           ) : (
             <motion.div key={`card-${round}`} className="pd-card" exit={LEAVE}>
+              {/* fuxx 0.13.9's one header line: ☰ Claude's plan · the file ↗ · its steps. */}
               <div className="pd-head">
-                <Icon name="listChecks" size={14} className="pd-icon" />
+                <Icon name="menu" size={13} className="pd-icon" />
                 <span className="pd-who">Claude’s plan</span>
+                <span className="pd-dim">·</span>
                 <span className="pd-file">
-                  retry-current-endpoint.md <Icon name="externalLink" size={11} />
+                  <span className="pd-file__name">retry-current-endpoint.md</span> <Icon name="externalLink" size={11} />
                 </span>
+                <span className="pd-dim">·</span>
+                <span className="pd-dim">4 steps</span>
               </div>
-              <div className="pd-title">Retry against the current endpoint</div>
               <div className={`pd-body ${folded ? 'is-folded' : ''}`}>
                 {LINES.slice(0, shown).map((l, i) => (
                   <div key={i} className={`pd-line pd-line--${l.kind}`}>
@@ -138,15 +142,15 @@ export function PlanDemo({ reduced = false }: { reduced?: boolean }) {
               </div>
               {folded ? (
                 <div ref={moreRef} className="pd-more">
-                  Show the whole plan <Icon name="chevronDown" size={12} />
+                  Show all <Icon name="chevronDown" size={12} />
                 </div>
               ) : null}
               <div className="pd-actions">
                 <span ref={approveRef} className={`pd-btn pd-btn--pri ${name === 'pressing' ? 'is-pressed' : ''}`}>
-                  Approve · auto-accept edits <Icon name="cornerDownLeft" size={12} />
+                  Approve · auto-accept <Icon name="cornerDownLeft" size={12} />
                 </span>
-                <span className="pd-btn">Approve · ask per edit</span>
-                <span className="pd-quiet">Keep planning…</span>
+                <span className="pd-btn">Approve</span>
+                <span className="pd-quiet">Keep planning</span>
               </div>
             </motion.div>
           )}
