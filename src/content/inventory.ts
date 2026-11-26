@@ -1,4 +1,4 @@
-// Every user-facing capability of fuxx v0.13.11 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
+// Every user-facing capability of fuxx v0.13.12 (the spec's inventory, one entry each; sources: fuxx-cli's progress log
 // and note 93's "Chores after M11ar").
 // The page may claim nothing beyond this list; tests/coverage.test.ts checks every entry is shown.
 export type Group = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L'
